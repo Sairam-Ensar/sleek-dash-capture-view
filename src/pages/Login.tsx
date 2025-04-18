@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User, Shield } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -73,44 +72,43 @@ const Login = () => {
 
   return (
     <div className="h-screen flex overflow-hidden">
-      {/* Left Side - Gradient Background with Image */}
+      {/* Left Side - Gradient Background */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/90 to-blue-700 flex-col justify-center items-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-blue-700/90 z-10"></div>
         
-        <div className="z-20 text-white mb-8 animate-fade-in">
-          <img 
-            src="/lovable-uploads/043cffa9-fc3a-4320-9d59-c843a95de8b0.png" 
-            alt="Ensar Logo" 
-            className="h-20 mb-6 opacity-90"
-          />
+        <div className="z-20 text-white mb-8 text-center">
+          <div className="flex justify-center mb-6">
+            <Shield className="h-20 w-20 opacity-90" />
+          </div>
           <h1 className="text-4xl font-bold mb-4">Ensar HR</h1>
-          <p className="text-xl mb-8">Workforce Management Platform</p>
+          <p className="text-xl mb-8">Premium Workforce Management Platform</p>
+          
+          <div className="grid grid-cols-2 gap-6 mt-12 w-full max-w-lg">
+            <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+              <Users className="h-8 w-8 mb-4 text-white/90" />
+              <h3 className="text-lg font-semibold mb-2">Employee Management</h3>
+              <p className="text-sm text-white/80">Comprehensive HR tools for modern workforce</p>
+            </div>
+            <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+              <BarChart3 className="h-8 w-8 mb-4 text-white/90" />
+              <h3 className="text-lg font-semibold mb-2">Analytics & Reports</h3>
+              <p className="text-sm text-white/80">Data-driven insights for better decisions</p>
+            </div>
+          </div>
         </div>
-        
-        <div className="relative z-20 w-full max-w-md">
-          <img 
-            src="/lovable-uploads/1bf0e48b-391c-4e7a-a5c1-58a4988b103d.png" 
-            alt="HR Dashboard" 
-            className="w-full rounded-lg shadow-2xl animate-float"
-          />
-        </div>
-        
-        {/* Animated shapes */}
-        <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-white/10 animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-white/5 animate-pulse-slow delay-500"></div>
       </div>
 
       {/* Right Side - Login Form */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 bg-background">
-        <div className="w-full max-w-md space-y-8 animate-fade-in-up">
+        <div className="w-full max-w-md space-y-8">
           <div className="text-center">
             <div className="flex justify-center mb-4">
               <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
                 <Lock className="h-8 w-8 text-primary" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight">Login to Your Account</h2>
-            <p className="text-muted-foreground mt-2">Enter your credentials to access your dashboard</p>
+            <h2 className="text-3xl font-bold tracking-tight">Welcome Back</h2>
+            <p className="text-muted-foreground mt-2">Sign in to access your dashboard</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6 mt-8">

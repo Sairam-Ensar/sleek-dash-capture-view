@@ -13,6 +13,9 @@ import {
   Box,
   FileText,
   Settings,
+  BarChart3,
+  Shield,
+  HelpCircle,
 } from "lucide-react";
 
 import {
@@ -33,20 +36,24 @@ const menuItems = [
   { title: "Projects", icon: Briefcase, path: "/projects" },
   { title: "Time Off", icon: Clock, path: "/time-off" },
   { title: "Departments", icon: Building, path: "/departments" },
-  { title: "Designations", icon: Settings, path: "/designations" },
-  { title: "Skills & Expertise", icon: GraduationCap, path: "/skills" },
-  { title: "Educations", icon: BookOpen, path: "/educations" },
-  { title: "Learning", icon: GraduationCap, path: "/learning" },
+  { title: "Training", icon: GraduationCap, path: "/training" },
+  { title: "Documentation", icon: BookOpen, path: "/docs" },
   { title: "Attendance", icon: ClipboardCheck, path: "/attendance" },
   { title: "Assets", icon: Box, path: "/assets" },
-  { title: "Templates", icon: FileText, path: "/templates" },
+  { title: "Reports", icon: BarChart3, path: "/reports" },
+  { title: "Security", icon: Shield, path: "/security" },
+  { title: "Help Center", icon: HelpCircle, path: "/help" },
+  { title: "Settings", icon: Settings, path: "/settings" }
 ];
 
 export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <img src="/lovable-uploads/827c8d6f-70da-4a46-91f8-462f18f20e77.png" alt="Logo" className="h-8" />
+        <div className="flex items-center gap-2">
+          <Shield className="h-8 w-8 text-primary" />
+          <span className="font-bold text-xl">Ensar HR</span>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
