@@ -1,6 +1,7 @@
 
 import { LucideProps } from "lucide-react";
 import { ReactNode } from "react";
+import { TooltipContent } from "@/components/ui/tooltip";
 
 export type SidebarContext = {
   state: "expanded" | "collapsed";

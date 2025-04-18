@@ -7,6 +7,34 @@ export { SidebarProvider } from "./sidebar-provider";
 export { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "./sidebar-menu";
 export { useSidebar } from "./context";
 
+// Create and export the SidebarContent component
+export const SidebarContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div 
+    ref={ref}
+    data-sidebar="content"
+    className={cn("flex flex-1 flex-col overflow-hidden", className)}
+    {...props}
+  />
+));
+SidebarContent.displayName = "SidebarContent";
+
+// Create and export the SidebarHeader component
+export const SidebarHeader = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-sidebar="header"
+    className={cn("flex items-center px-4 py-2", className)}
+    {...props}
+  />
+));
+SidebarHeader.displayName = "SidebarHeader";
+
 export const Sidebar = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<"div"> & {
