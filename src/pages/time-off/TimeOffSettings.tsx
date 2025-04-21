@@ -3,7 +3,7 @@ import { Wrench, HelpCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader, PageHeaderAction } from "@/components/ui/page-header";
 import { Button } from "@/components/ui/button";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 export default function TimeOffSettings() {
   return (
@@ -18,10 +18,13 @@ export default function TimeOffSettings() {
         ]}
       >
         <PageHeaderAction>
-          <Tooltip content="Help & Docs">
-            <Button variant="ghost" size="icon">
-              <HelpCircle className="h-5 w-5" />
-            </Button>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button variant="ghost" size="icon">
+                <HelpCircle className="h-5 w-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Help & Docs</TooltipContent>
           </Tooltip>
         </PageHeaderAction>
       </PageHeader>
