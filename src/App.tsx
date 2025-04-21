@@ -15,6 +15,12 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
+// Time Off Module Pages
+import TimeOffOverview from "./pages/time-off/TimeOffOverview";
+import Holidays from "./pages/time-off/Holidays";
+import Leave from "./pages/time-off/Leave";
+import Allowances from "./pages/time-off/Allowances";
+
 const queryClient = new QueryClient();
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
@@ -26,7 +32,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
           <div className="flex items-center justify-between p-4 border-b">
             <SidebarTrigger />
           </div>
-          <main className="flex-1 p-6">{children}</main>
+          <main className="flex-1">{children}</main>
         </div>
       </SidebarInset>
     </div>
@@ -44,6 +50,13 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
           <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
+          
+          {/* Time Off Module Routes */}
+          <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
+          <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
+          <Route path="/time-off/leave" element={<AppLayout><Leave /></AppLayout>} />
+          <Route path="/time-off/allowances" element={<AppLayout><Allowances /></AppLayout>} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
         </Routes>
