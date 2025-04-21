@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
+import AllEmployees from "./pages/AllEmployees";
 
 // Time Off Module Pages
 import TimeOffOverview from "./pages/time-off/TimeOffOverview";
@@ -57,6 +58,9 @@ const App = () => {
             
             {/* Add Profile route */}
             <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
+
+            {/* All Employees route */}
+            <Route path="/employees" element={<AppLayout><AllEmployees /></AppLayout>} />
 
             {/* Time Off Module Routes */}
             <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
