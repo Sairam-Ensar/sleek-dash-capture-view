@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Lock, Mail, User, Shield } from "lucide-react";
+import { 
+  Eye, 
+  EyeOff, 
+  Lock, 
+  Mail, 
+  User, 
+  Shield,
+  Users,
+  BarChart3
+} from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
