@@ -13,6 +13,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 // Time Off Module Pages
 import TimeOffOverview from "./pages/time-off/TimeOffOverview";
@@ -54,6 +55,9 @@ const App = () => {
             <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
             <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
             
+            {/* Add Profile route */}
+            <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
+
             {/* Time Off Module Routes */}
             <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
             <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
