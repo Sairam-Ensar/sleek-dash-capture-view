@@ -47,8 +47,8 @@ export default function Profile() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Save profile logic here (API request)
-    // Show success toast using the imported toast function
-    toast("Profile saved!", { type: "success" });
+    // Show success toast using the correct format for sonner
+    toast.success("Profile saved!");
   };
 
   return (
