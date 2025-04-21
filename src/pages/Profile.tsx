@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Pen } from "lucide-react";
+import { toast } from "sonner"; // Import toast from sonner
 
 const DEFAULT_PROFILE_IMAGE = "/lovable-uploads/602f4d60-71af-476c-b318-9b981387be9e.png";
 
@@ -46,8 +47,8 @@ export default function Profile() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Save profile logic here (API request)
-    // Show success toast
-    window?.toast?.("Profile saved!", { type: "success" });
+    // Show success toast using the imported toast function
+    toast("Profile saved!", { type: "success" });
   };
 
   return (
