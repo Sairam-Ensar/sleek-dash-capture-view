@@ -21,8 +21,6 @@ import Holidays from "./pages/time-off/Holidays";
 import Leave from "./pages/time-off/Leave";
 import Allowances from "./pages/time-off/Allowances";
 
-const queryClient = new QueryClient();
-
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <SidebarProvider>
     <div className="flex min-h-screen w-full bg-background">
@@ -39,30 +37,35 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
   </SidebarProvider>
 );
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
-          
-          {/* Time Off Module Routes */}
-          <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
-          <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
-          <Route path="/time-off/leave" element={<AppLayout><Leave /></AppLayout>} />
-          <Route path="/time-off/allowances" element={<AppLayout><Allowances /></AppLayout>} />
+const App = () => {
+  // Create a new QueryClient instance inside the component
+  const queryClient = new QueryClient();
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
+            <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
+            
+            {/* Time Off Module Routes */}
+            <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
+            <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
+            <Route path="/time-off/leave" element={<AppLayout><Leave /></AppLayout>} />
+            <Route path="/time-off/allowances" element={<AppLayout><Allowances /></AppLayout>} />
+
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
