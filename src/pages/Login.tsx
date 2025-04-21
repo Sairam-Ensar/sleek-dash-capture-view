@@ -14,6 +14,9 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import LoginHeader from "./LoginHeader";
+import ForgotPasswordDialog from "./ForgotPasswordDialog";
+import RegisterDialog from "./RegisterDialog";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,8 +32,6 @@ const Login = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       if (email && password) {
@@ -52,8 +53,6 @@ const Login = () => {
   const handleForgotPassword = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       toast({
@@ -61,14 +60,13 @@ const Login = () => {
         description: "Please check your email for password reset instructions",
       });
       setForgotPasswordOpen(false);
+      setResetEmail("");
     }, 1500);
   };
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       toast({
@@ -81,17 +79,14 @@ const Login = () => {
 
   return (
     <div className="h-screen flex overflow-hidden">
-      {/* Left Side - Gradient Background */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/90 to-blue-700 flex-col justify-center items-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-blue-700/90 z-10"></div>
-        
         <div className="z-20 text-white mb-8 text-center">
           <div className="flex justify-center mb-6">
             <Shield className="h-20 w-20 opacity-90" />
           </div>
           <h1 className="text-4xl font-bold mb-4">Ensar HR</h1>
           <p className="text-xl mb-8">Premium Workforce Management Platform</p>
-          
           <div className="grid grid-cols-2 gap-6 mt-12 w-full max-w-lg">
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <Users className="h-8 w-8 mb-4 text-white/90" />
@@ -106,20 +101,9 @@ const Login = () => {
           </div>
         </div>
       </div>
-
-      {/* Right Side - Login Form */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 bg-background">
         <div className="w-full max-w-md space-y-8">
-          <div className="text-center">
-            <div className="flex justify-center mb-4">
-              <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <Lock className="h-8 w-8 text-primary" />
-              </div>
-            </div>
-            <h2 className="text-3xl font-bold tracking-tight">Welcome Back</h2>
-            <p className="text-muted-foreground mt-2">Sign in to access your dashboard</p>
-          </div>
-
+          <LoginHeader />
           <form onSubmit={handleLogin} className="space-y-6 mt-8">
             <div className="space-y-4">
               <div className="relative">
@@ -133,7 +117,6 @@ const Login = () => {
                   required
                 />
               </div>
-              
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                 <Input
@@ -149,11 +132,14 @@ const Login = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
                 >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
                 </button>
               </div>
             </div>
-
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -166,7 +152,6 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-
               <button
                 type="button"
                 onClick={() => setForgotPasswordOpen(true)}
@@ -175,16 +160,14 @@ const Login = () => {
                 Forgot password?
               </button>
             </div>
-
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full h-12 text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
-
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Don't have an account?{" "}
@@ -200,88 +183,20 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Forgot Password Dialog */}
-      <Dialog open={forgotPasswordOpen} onOpenChange={setForgotPasswordOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Reset your password</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleForgotPassword} className="space-y-4">
-            <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Enter your email address and we will send you a link to reset your password.
-              </p>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-                <Input
-                  type="email"
-                  placeholder="Email Address"
-                  value={resetEmail}
-                  onChange={(e) => setResetEmail(e.target.value)}
-                  className="pl-10"
-                  required
-                />
-              </div>
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" type="button" onClick={() => setForgotPasswordOpen(false)}>
-                Cancel
-              </Button>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Sending..." : "Send Reset Link"}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
-
-      {/* Register Dialog */}
-      <Dialog open={registerOpen} onOpenChange={setRegisterOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Register as an Employee</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleRegister} className="space-y-4">
-            <div className="space-y-3">
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-                <Input 
-                  placeholder="Full Name" 
-                  className="pl-10" 
-                  required 
-                />
-              </div>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-                <Input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="pl-10" 
-                  required 
-                />
-              </div>
-              <div className="relative">
-                <Input 
-                  type="text" 
-                  placeholder="Employee ID (if known)" 
-                  className="pl-3" 
-                />
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Your registration will be reviewed by HR before activation.
-            </p>
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" type="button" onClick={() => setRegisterOpen(false)}>
-                Cancel
-              </Button>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Submitting..." : "Register"}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <ForgotPasswordDialog
+        open={forgotPasswordOpen}
+        isLoading={isLoading}
+        email={resetEmail}
+        setEmail={setResetEmail}
+        onSubmit={handleForgotPassword}
+        onClose={() => setForgotPasswordOpen(false)}
+      />
+      <RegisterDialog
+        open={registerOpen}
+        isLoading={isLoading}
+        onSubmit={handleRegister}
+        onClose={() => setRegisterOpen(false)}
+      />
     </div>
   );
 };
