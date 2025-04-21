@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -20,6 +19,7 @@ import {
   CalendarDays,
   CalendarCheck,
   CalendarRange,
+  Bell
 } from "lucide-react";
 
 import {
@@ -49,6 +49,7 @@ const timeOffItems = [
   { title: "Holidays", icon: CalendarDays, path: "/time-off/holidays" },
   { title: "Leave Requests", icon: CalendarCheck, path: "/time-off/leave" },
   { title: "Allowances", icon: CalendarRange, path: "/time-off/allowances" },
+  { title: "Settings", icon: Settings, path: "/time-off/settings" }
 ];
 
 // Additional menu items
@@ -63,6 +64,7 @@ const additionalItems = [
   { title: "Reports", icon: FileText, path: "/reports" },
   { title: "Security", icon: Shield, path: "/security" },
   { title: "Help Center", icon: HelpCircle, path: "/help" },
+  { title: "Notifications & Activity Log", icon: Bell, path: "/notifications" },
   { title: "Settings", icon: Settings, path: "/settings" }
 ];
 
