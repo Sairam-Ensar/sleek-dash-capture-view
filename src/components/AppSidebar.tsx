@@ -48,8 +48,7 @@ const timeOffItems = [
   { title: "Time Off Overview", icon: CalendarClock, path: "/time-off" },
   { title: "Holidays", icon: CalendarDays, path: "/time-off/holidays" },
   { title: "Leave Requests", icon: CalendarCheck, path: "/time-off/leave" },
-  { title: "Allowances", icon: CalendarRange, path: "/time-off/allowances" },
-  { title: "Settings", icon: Settings, path: "/time-off/settings" }
+  { title: "Allowances", icon: CalendarRange, path: "/time-off/allowances" }
 ];
 
 // Additional menu items

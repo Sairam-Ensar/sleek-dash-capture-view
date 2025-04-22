@@ -21,7 +21,6 @@ import TimeOffOverview from "./pages/time-off/TimeOffOverview";
 import Holidays from "./pages/time-off/Holidays";
 import Leave from "./pages/time-off/Leave";
 import Allowances from "./pages/time-off/Allowances";
-import TimeOffSettings from "./pages/time-off/TimeOffSettings";
 import NotificationsActivity from "./pages/NotificationsActivity";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
@@ -41,7 +40,6 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
 );
 
 const App = () => {
-  // Create a new QueryClient instance inside the component
   const queryClient = new QueryClient();
 
   return (
@@ -55,22 +53,22 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
             <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
-            
-            {/* Add Profile route */}
             <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
-
-            {/* All Employees route */}
             <Route path="/employees" element={<AppLayout><AllEmployees /></AppLayout>} />
+            
+            <Route path="/projects" element={<AppLayout><Projects /></AppLayout>} />
+            
+            <Route path="/departments" element={<AppLayout><Departments /></AppLayout>} />
+            
+            <Route path="/designations" element={<AppLayout><Designations /></AppLayout>} />
 
-            {/* Time Off Module Routes */}
             <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
             <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
             <Route path="/time-off/leave" element={<AppLayout><Leave /></AppLayout>} />
             <Route path="/time-off/allowances" element={<AppLayout><Allowances /></AppLayout>} />
-            <Route path="/time-off/settings" element={<AppLayout><TimeOffSettings /></AppLayout>} />
+            
             <Route path="/notifications" element={<AppLayout><NotificationsActivity /></AppLayout>} />
 
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
           </Routes>
         </BrowserRouter>
