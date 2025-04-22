@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Table,
@@ -12,6 +13,14 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal } from "lucide-react";
 import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
 import { Button } from "@/components/ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 // Dummy skills data
 const skills = [
