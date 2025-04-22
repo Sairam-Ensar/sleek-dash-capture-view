@@ -93,6 +93,8 @@ const App = () => {
             <Route path="/assets" element={<AppLayout><Assets /></AppLayout>} />
             <Route path="/templates" element={<AppLayout><Templates /></AppLayout>} />
 
+            <Route path="/help" element={<AppLayout><HelpCenter /></AppLayout>} />
+
             <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
           </Routes>
         </BrowserRouter>
