@@ -27,7 +27,16 @@ interface LetterFormProps {
   type: string;
 }
 
-const letterTemplates = {
+// Define a type for the letter template structure
+interface LetterTemplate {
+  subject: string;
+  content: string;
+  salutation: string;
+  closing: string;
+}
+
+// Type the letterTemplates object
+const letterTemplates: Record<string, LetterTemplate> = {
   offer: {
     subject: "Job Offer: [Position] at Ensar HR",
     content: `Dear [Candidate Name],
@@ -209,7 +218,17 @@ Sincerely,
 
 export const CreateLetterForm = ({ type }: LetterFormProps) => {
   const [loading, setLoading] = useState(false);
-  const template = letterTemplates[type as keyof typeof letterTemplates] || {};
+  
+  // Create a default empty template object with all required fields
+  const defaultTemplate: LetterTemplate = {
+    subject: "",
+    content: "",
+    salutation: "Dear",
+    closing: "Sincerely,"
+  };
+  
+  // Get the template for the specified type or use the default empty template
+  const template = letterTemplates[type] || defaultTemplate;
   
   const { register, handleSubmit, formState: { errors } } = useForm<LetterFormData>({
     resolver: zodResolver(letterSchema),
@@ -217,10 +236,10 @@ export const CreateLetterForm = ({ type }: LetterFormProps) => {
       title: "",
       recipient: "",
       sender: "",
-      subject: template.subject || "",
-      content: template.content || "",
-      salutation: template.salutation || "Dear",
-      closing: template.closing || "Sincerely,"
+      subject: template.subject,
+      content: template.content,
+      salutation: template.salutation,
+      closing: template.closing
     }
   });
 
