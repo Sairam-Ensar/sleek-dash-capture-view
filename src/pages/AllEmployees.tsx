@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -11,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
-import { MoreHorizontal, Import, Export, ArrowDown, Plus } from "lucide-react";
+import { MoreHorizontal, Download, ArrowDown, ArrowUpDown, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Dummy avatar images
@@ -97,7 +96,7 @@ export default function AllEmployees() {
           </Button>
           <div className="flex gap-2">
             <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
-              <Import className="w-4 h-4" />
+              <Download className="w-4 h-4" />
               IMPORT DATA
             </Button>
             <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
@@ -105,7 +104,7 @@ export default function AllEmployees() {
               SAMPLE IMPORT
             </Button>
             <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
-              <Export className="w-4 h-4" />
+              <ArrowUpDown className="w-4 h-4" />
               EXPORT DATA
             </Button>
             <Button className="bg-gradient-to-r from-primary to-blue-700 text-white font-semibold px-5 rounded-full hover:from-blue-700 hover:to-blue-800">
