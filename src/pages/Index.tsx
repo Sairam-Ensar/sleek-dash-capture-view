@@ -1,7 +1,6 @@
-
 import { PremiumButton } from "@/components/ui/premium-button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, BarChart3, Calendar, CheckCircle, Lightning, Shield, Users } from "lucide-react";
+import { ArrowRight, BarChart3, Calendar, CheckCircle, Zap, Shield, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
@@ -170,7 +169,7 @@ const Index = () => {
       <div className="bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-2xl p-8 shadow-sm border border-primary/10 animate-fade-in delay-300">
         <div className="flex items-center gap-3 mb-4">
           <div className="bg-gradient-to-r from-primary to-blue-600 rounded-full p-2 shadow-md">
-            <Lightning className="h-6 w-6 text-white" />
+            <Zap className="h-6 w-6 text-white" />
           </div>
           <h2 className="text-2xl font-semibold">Premium Features Activated</h2>
         </div>
