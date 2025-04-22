@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -70,7 +69,7 @@ export default function Educations() {
                 <TableHead>Start Year</TableHead>
                 <TableHead>End Year</TableHead>
                 <TableHead>Document</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

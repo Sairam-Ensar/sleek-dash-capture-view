@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -70,7 +69,7 @@ export default function Learning() {
                 <TableHead>End Date</TableHead>
                 <TableHead>Watched Link</TableHead>
                 <TableHead>Evidence Document</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

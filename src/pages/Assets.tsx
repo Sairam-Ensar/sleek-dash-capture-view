@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -76,7 +75,7 @@ export default function Assets() {
                 <TableHead>Processor</TableHead>
                 <TableHead>RAM</TableHead>
                 <TableHead>Hard Disk</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

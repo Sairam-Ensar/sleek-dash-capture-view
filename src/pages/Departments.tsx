@@ -54,14 +54,14 @@ export default function Departments() {
             <TableHeader>
               <TableRow className="bg-gray-50">
                 <TableHead>Department Name</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {departments.map((department, index) => (
                 <TableRow key={index} className="hover:bg-gray-50">
                   <TableCell className="font-medium">{department.name}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>

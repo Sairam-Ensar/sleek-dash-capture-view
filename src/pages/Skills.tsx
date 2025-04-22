@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Table,
@@ -73,7 +72,7 @@ export default function Skills() {
                 <TableHead>Expertise</TableHead>
                 <TableHead>Approved By</TableHead>
                 <TableHead>Approved Status</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -84,7 +83,7 @@ export default function Skills() {
                   <TableCell>{skill.expertise}</TableCell>
                   <TableCell>{skill.approvedBy}</TableCell>
                   <TableCell>{skill.status}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>

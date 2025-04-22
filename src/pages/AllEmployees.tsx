@@ -13,7 +13,6 @@ import { useState } from "react";
 import { MoreHorizontal, Download, ArrowDown, ArrowUpDown, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Dummy avatar images
 const fallbackAvatars = [
   "/lovable-uploads/043cffa9-fc3a-4320-9d59-c843a95de8b0.png",
   "/lovable-uploads/602f4d60-71af-476c-b318-9b981387be9e.png",
@@ -21,7 +20,6 @@ const fallbackAvatars = [
   "/lovable-uploads/827c8d6f-70da-4a46-91f8-462f18f20e77.png",
 ];
 
-// Dummy employee data
 const employees = [
   {
     name: "Srinivas Keerthi",
@@ -57,7 +55,6 @@ const employees = [
   },
 ];
 
-// Simple filter for status; statically set to "Active" for now
 const status = {
   label: "Active",
   color: "bg-green-100",
@@ -68,7 +65,6 @@ const status = {
 export default function AllEmployees() {
   const [search, setSearch] = useState("");
 
-  // Static filtered list for simplicity (all "active")
   const filteredEmployees = employees.filter(
     (emp) =>
       emp.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -78,7 +74,6 @@ export default function AllEmployees() {
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
-      {/* Header row */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5 px-2">
         <h1 className="text-2xl font-bold text-[#222741]">All Employees</h1>
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
@@ -115,15 +110,12 @@ export default function AllEmployees() {
         </div>
       </div>
 
-      {/* Filters and search */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 px-2">
-        {/* Status filter (static) */}
         <div className={cn("flex items-center px-4 py-2.5 rounded-full border border-gray-200 text-gray-800 font-semibold gap-2", status.color)}>
           <span className={cn("h-2.5 w-2.5 rounded-full", status.dot)} />
           Status: {status.label}
           <span className="ml-2 text-green-600">{status.count}</span>
         </div>
-        {/* Search bar */}
         <Input
           type="text"
           placeholder="Search...Employee Details"
@@ -133,7 +125,6 @@ export default function AllEmployees() {
         />
       </div>
 
-      {/* Card for table */}
       <Card className="w-full bg-white/90 rounded-2xl shadow-lg p-4">
         <div className="overflow-x-auto rounded-2xl">
           <Table>
@@ -144,7 +135,7 @@ export default function AllEmployees() {
                 <TableHead>Email</TableHead>
                 <TableHead>Date of Birth</TableHead>
                 <TableHead>Mobile</TableHead>
-                <TableHead className="w-16 min-w-12">Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -164,7 +155,7 @@ export default function AllEmployees() {
                   <TableCell>{emp.email}</TableCell>
                   <TableCell>{emp.dob}</TableCell>
                   <TableCell>{emp.mobile}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal />
                     </Button>
@@ -181,7 +172,6 @@ export default function AllEmployees() {
             </TableBody>
           </Table>
         </div>
-        {/* Table Pagination Footer */}
         <div className="flex items-center justify-between mt-4 px-2 gap-2">
           <span className="text-gray-600 text-sm">Rows per page:
             <span className="ml-2 font-semibold">5</span>
@@ -191,13 +181,11 @@ export default function AllEmployees() {
           </span>
           <div className="flex gap-2">
             <Button variant="ghost" size="icon" className="rounded-full" disabled>
-              {/* Left arrow, disabled */}
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M13 15L8 10L13 5" stroke="#C2C6CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Button>
             <Button variant="ghost" size="icon" className="rounded-full" disabled>
-              {/* Right arrow, disabled */}
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M7 5L12 10L7 15" stroke="#C2C6CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

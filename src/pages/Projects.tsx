@@ -102,7 +102,7 @@ export default function Projects() {
                 <TableHead>Status</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Doc</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -123,7 +123,7 @@ export default function Projects() {
                   <TableCell>{project.status}</TableCell>
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{project.docs}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>

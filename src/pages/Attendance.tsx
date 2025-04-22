@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -85,7 +84,7 @@ export default function Attendance() {
                 <TableHead>Check Out</TableHead>
                 <TableHead>Total Hours</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -101,7 +100,7 @@ export default function Attendance() {
                       {record.status}
                     </span>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>

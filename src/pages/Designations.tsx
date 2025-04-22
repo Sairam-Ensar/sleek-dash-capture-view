@@ -53,7 +53,7 @@ export default function Designations() {
               <TableRow className="bg-gray-50">
                 <TableHead>Designation</TableHead>
                 <TableHead>Department</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -61,7 +61,7 @@ export default function Designations() {
                 <TableRow key={index} className="hover:bg-gray-50">
                   <TableCell className="font-medium">{designation.title}</TableCell>
                   <TableCell>{designation.department}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
