@@ -7,6 +7,7 @@ import "@/components/styles/animations.css";
 
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { Header } from "@/components/Header";
 
 // Pages
 import Index from "./pages/Index";
@@ -36,15 +37,17 @@ import NotificationsActivity from "./pages/NotificationsActivity";
 // Attendance Page
 import Attendance from "./pages/Attendance";
 
+// Assets and Templates Pages
+import Assets from "./pages/Assets";
+import Templates from "./pages/Templates";
+
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <SidebarProvider>
     <div className="flex min-h-screen w-full bg-background">
       <AppSidebar />
       <SidebarInset>
         <div className="flex min-h-full w-full flex-col">
-          <div className="flex items-center justify-between p-4 border-b">
-            <SidebarTrigger />
-          </div>
+          <Header />
           <main className="flex-1">{children}</main>
         </div>
       </SidebarInset>
@@ -87,6 +90,8 @@ const App = () => {
             <Route path="/notifications" element={<AppLayout><NotificationsActivity /></AppLayout>} />
 
             <Route path="/attendance" element={<AppLayout><Attendance /></AppLayout>} />
+            <Route path="/assets" element={<AppLayout><Assets /></AppLayout>} />
+            <Route path="/templates" element={<AppLayout><Templates /></AppLayout>} />
 
             <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
           </Routes>

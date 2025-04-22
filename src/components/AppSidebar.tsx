@@ -10,16 +10,13 @@ import {
   BookOpen,
   ClipboardCheck,
   Box,
-  Settings,
-  Shield,
   HelpCircle,
-  FileText,
   Calendar,
   Clock,
   CalendarDays,
   CalendarCheck,
   CalendarRange,
-  Bell
+  LayoutTemplate,
 } from "lucide-react";
 
 import {
@@ -60,11 +57,8 @@ const additionalItems = [
   { title: "Learning", icon: GraduationCap, path: "/learning" },
   { title: "Attendance", icon: ClipboardCheck, path: "/attendance" },
   { title: "Assets", icon: Box, path: "/assets" },
-  { title: "Reports", icon: FileText, path: "/reports" },
-  { title: "Security", icon: Shield, path: "/security" },
+  { title: "Templates", icon: LayoutTemplate, path: "/templates" },
   { title: "Help Center", icon: HelpCircle, path: "/help" },
-  { title: "Notifications & Activity Log", icon: Bell, path: "/notifications" },
-  { title: "Settings", icon: Settings, path: "/settings" }
 ];
 
 export function AppSidebar() {
