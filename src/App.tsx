@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +20,11 @@ import AllEmployees from "./pages/AllEmployees";
 import Projects from "./pages/Projects";
 import Departments from "./pages/Departments";
 import Designations from "./pages/Designations";
+
+// Skills, Education and Learning Pages
+import Skills from "./pages/Skills";
+import Educations from "./pages/Educations";
+import Learning from "./pages/Learning";
 
 // Time Off Module Pages
 import TimeOffOverview from "./pages/time-off/TimeOffOverview";
@@ -67,6 +71,10 @@ const App = () => {
             <Route path="/departments" element={<AppLayout><Departments /></AppLayout>} />
             
             <Route path="/designations" element={<AppLayout><Designations /></AppLayout>} />
+
+            <Route path="/skills" element={<AppLayout><Skills /></AppLayout>} />
+            <Route path="/educations" element={<AppLayout><Educations /></AppLayout>} />
+            <Route path="/learning" element={<AppLayout><Learning /></AppLayout>} />
 
             <Route path="/time-off" element={<AppLayout><TimeOffOverview /></AppLayout>} />
             <Route path="/time-off/holidays" element={<AppLayout><Holidays /></AppLayout>} />
