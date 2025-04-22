@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +16,11 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import AllEmployees from "./pages/AllEmployees";
+
+// Projects, Departments and Designations Pages
+import Projects from "./pages/Projects";
+import Departments from "./pages/Departments";
+import Designations from "./pages/Designations";
 
 // Time Off Module Pages
 import TimeOffOverview from "./pages/time-off/TimeOffOverview";
