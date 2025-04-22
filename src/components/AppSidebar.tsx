@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -19,6 +20,7 @@ import {
   LayoutTemplate,
   FileText,
   Shield,
+  Bell,
 } from "lucide-react";
 
 import {
@@ -57,8 +59,54 @@ const additionalItems = [
   { title: "Attendance", icon: ClipboardCheck, path: "/attendance" },
   { title: "Assets", icon: Box, path: "/assets" },
   { title: "Templates", icon: LayoutTemplate, path: "/templates" },
+  { title: "Notifications", icon: Bell, path: "/notifications" },
   { title: "Help Center", icon: HelpCircle, path: "/help" },
 ];
+
+const MenuItem = ({ item, isActive }: { item: { title: string; icon: any; path: string }, isActive: boolean }) => {
+  const Icon = item.icon;
+  
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuButton 
+        asChild 
+        tooltip={item.title}
+        isActive={isActive}
+      >
+        <Link
+          to={item.path}
+          className={cn(
+            "flex items-center gap-3 w-full transition-all duration-300",
+            "hover:bg-gradient-to-r hover:from-primary/10 hover:to-blue-500/5",
+            "hover:text-sidebar-accent-foreground group",
+            "rounded-md overflow-hidden",
+            isActive 
+              ? "bg-gradient-to-r from-primary/20 to-blue-500/10 font-medium text-primary shadow-sm" 
+              : "text-sidebar-foreground"
+          )}
+        >
+          <span className={cn(
+            "flex items-center justify-center p-1.5 rounded-md transition-all duration-300",
+            isActive 
+              ? "text-white bg-gradient-to-br from-primary to-blue-600 shadow-md" 
+              : "text-sidebar-foreground bg-sidebar-accent/50 group-hover:bg-primary/10"
+          )}>
+            <Icon className="h-4 w-4" />
+          </span>
+          <span className={cn(
+            "font-medium transition-all duration-300",
+            isActive ? "scale-105" : ""
+          )}>
+            {item.title}
+          </span>
+          {isActive && (
+            <span className="absolute right-0 h-full w-1 bg-primary rounded-l-md animate-pulse-slow" />
+          )}
+        </Link>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  );
+};
 
 export function AppSidebar() {
   const location = useLocation();
@@ -76,34 +124,26 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
-          <Shield className="h-8 w-8 text-primary" />
-          <span className="font-bold text-xl bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">Ensar HR</span>
+        <div className="flex items-center gap-3 px-2">
+          <div className="p-1.5 rounded-md bg-gradient-to-br from-primary to-blue-700 shadow-md">
+            <Shield className="h-6 w-6 text-white" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-lg bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
+              Ensar HR
+            </span>
+            <span className="text-xs text-muted-foreground">Enterprise Edition</span>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent className="px-3">
         <SidebarMenu>
           {menuItems.map((item) => (
-            <SidebarMenuItem key={item.path}>
-              <SidebarMenuButton 
-                asChild 
-                tooltip={item.title}
-                isActive={isActive(item.path)}
-              >
-                <Link
-                  to={item.path}
-                  className={cn(
-                    "flex items-center gap-2 w-full",
-                    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                    "transition-all duration-200 rounded-md",
-                    isActive(item.path) && "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
-                  )}
-                >
-                  <item.icon className="h-4 w-4" />
-                  <span className="font-medium">{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <MenuItem 
+              key={item.path} 
+              item={item} 
+              isActive={isActive(item.path)} 
+            />
           ))}
 
           <SidebarMenuItem>
@@ -116,15 +156,24 @@ export function AppSidebar() {
                 <SidebarMenuButton 
                   className={cn(
                     "flex items-center justify-between w-full",
-                    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                    "transition-all duration-200",
-                    isActive("/time-off") && "bg-sidebar-accent font-medium text-sidebar-accent-foreground",
+                    "hover:bg-gradient-to-r hover:from-primary/10 hover:to-blue-500/5",
+                    "transition-all duration-300 group",
+                    isActive("/time-off") 
+                      ? "bg-gradient-to-r from-primary/20 to-blue-500/10 font-medium text-primary shadow-sm" 
+                      : "text-sidebar-foreground",
                     "rounded-md"
                   )}
                   isActive={isActive("/time-off")}
                 >
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
+                  <div className="flex items-center gap-3">
+                    <span className={cn(
+                      "flex items-center justify-center p-1.5 rounded-md transition-all duration-300",
+                      isActive("/time-off") 
+                        ? "text-white bg-gradient-to-br from-primary to-blue-600 shadow-md" 
+                        : "text-sidebar-foreground bg-sidebar-accent/50 group-hover:bg-primary/10"
+                    )}>
+                      <Clock className="h-4 w-4" />
+                    </span>
                     <span className="font-medium">Time Off</span>
                   </div>
                   <svg
@@ -133,7 +182,7 @@ export function AppSidebar() {
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className={cn("transition-transform", timeOffOpen && "transform rotate-180")}
+                    className={cn("transition-transform duration-300", timeOffOpen && "transform rotate-180")}
                   >
                     <path
                       d="M4 6L8 10L12 6"
@@ -145,7 +194,7 @@ export function AppSidebar() {
                   </svg>
                 </SidebarMenuButton>
               </CollapsibleTrigger>
-              <CollapsibleContent className="pl-6 mt-1">
+              <CollapsibleContent className="pl-10 mt-1 space-y-1 animate-slide-in-right">
                 {timeOffItems.map((item) => (
                   <SidebarMenuItem key={item.path}>
                     <SidebarMenuButton 
@@ -159,9 +208,11 @@ export function AppSidebar() {
                         to={item.path}
                         className={cn(
                           "flex items-center gap-2 w-full py-1.5",
-                          "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                          "transition-all duration-200 rounded-md",
-                          location.pathname === item.path && "bg-sidebar-accent/50 font-medium text-sidebar-accent-foreground"
+                          "hover:bg-sidebar-accent/50 hover:text-primary/80",
+                          "transition-all duration-300 rounded-md",
+                          location.pathname === item.path 
+                            ? "bg-sidebar-accent/70 font-medium text-primary border-l-2 border-primary pl-2" 
+                            : ""
                         )}
                       >
                         <item.icon className="h-3.5 w-3.5" />
@@ -175,28 +226,21 @@ export function AppSidebar() {
           </SidebarMenuItem>
 
           {additionalItems.map((item) => (
-            <SidebarMenuItem key={item.path}>
-              <SidebarMenuButton 
-                asChild 
-                tooltip={item.title}
-                isActive={isActive(item.path)}
-              >
-                <Link
-                  to={item.path}
-                  className={cn(
-                    "flex items-center gap-2 w-full",
-                    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                    "transition-all duration-200 rounded-md",
-                    isActive(item.path) && "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
-                  )}
-                >
-                  <item.icon className="h-4 w-4" />
-                  <span className="font-medium">{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <MenuItem 
+              key={item.path} 
+              item={item} 
+              isActive={isActive(item.path)} 
+            />
           ))}
         </SidebarMenu>
+        
+        <div className="mt-8 px-4">
+          <div className="p-4 rounded-lg bg-gradient-to-br from-primary/5 to-blue-500/10 border border-primary/10 shadow-sm">
+            <h4 className="font-semibold text-sm mb-2">Premium Support</h4>
+            <p className="text-xs text-muted-foreground mb-3">Need help? Our premium support team is just a click away</p>
+            <Link to="/help" className="text-xs font-medium text-primary hover:underline">Contact Support →</Link>
+          </div>
+        </div>
       </SidebarContent>
     </Sidebar>
   );
