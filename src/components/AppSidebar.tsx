@@ -17,6 +17,8 @@ import {
   CalendarCheck,
   CalendarRange,
   LayoutTemplate,
+  FileText,
+  Shield,
 } from "lucide-react";
 
 import {
@@ -32,7 +34,6 @@ import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
 
-// Main menu items
 const menuItems = [
   { title: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
   { title: "My Profile", icon: User, path: "/profile" },
@@ -40,7 +41,6 @@ const menuItems = [
   { title: "Projects", icon: Briefcase, path: "/projects" },
 ];
 
-// Time off submenu items
 const timeOffItems = [
   { title: "Time Off Overview", icon: CalendarClock, path: "/time-off" },
   { title: "Holidays", icon: CalendarDays, path: "/time-off/holidays" },
@@ -48,7 +48,6 @@ const timeOffItems = [
   { title: "Allowances", icon: CalendarRange, path: "/time-off/allowances" }
 ];
 
-// Additional menu items
 const additionalItems = [
   { title: "Departments", icon: Building, path: "/departments" },
   { title: "Designations", icon: FileText, path: "/designations" },
@@ -67,7 +66,6 @@ export function AppSidebar() {
     location.pathname.includes("/time-off")
   );
 
-  // Function to check if a route is active
   const isActive = (path: string) => {
     if (path === "/time-off") {
       return location.pathname.startsWith("/time-off");
@@ -85,7 +83,6 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="px-3">
         <SidebarMenu>
-          {/* Main menu items */}
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.path}>
               <SidebarMenuButton 
@@ -109,7 +106,6 @@ export function AppSidebar() {
             </SidebarMenuItem>
           ))}
 
-          {/* Time Off collapsible section */}
           <SidebarMenuItem>
             <Collapsible 
               open={timeOffOpen} 
@@ -178,7 +174,6 @@ export function AppSidebar() {
             </Collapsible>
           </SidebarMenuItem>
 
-          {/* Additional menu items */}
           {additionalItems.map((item) => (
             <SidebarMenuItem key={item.path}>
               <SidebarMenuButton 
