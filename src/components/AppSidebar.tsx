@@ -125,15 +125,17 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3 px-2">
-          <div className="p-1.5 rounded-md bg-gradient-to-br from-primary to-blue-700 shadow-md">
-            <Shield className="h-6 w-6 text-white" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
-              Ensar HR
-            </span>
-            <span className="text-xs text-muted-foreground">Enterprise Edition</span>
-          </div>
+          <Link to="/dashboard" className="flex items-center gap-3">
+            <div className="p-1.5 rounded-md bg-gradient-to-br from-primary to-blue-700 shadow-md">
+              <Shield className="h-6 w-6 text-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
+                Ensar HR
+              </span>
+              <span className="text-xs text-muted-foreground">Enterprise Edition</span>
+            </div>
+          </Link>
         </div>
       </SidebarHeader>
       <SidebarContent className="px-3">
