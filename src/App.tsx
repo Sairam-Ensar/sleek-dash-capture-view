@@ -33,6 +33,9 @@ import Leave from "./pages/time-off/Leave";
 import Allowances from "./pages/time-off/Allowances";
 import NotificationsActivity from "./pages/NotificationsActivity";
 
+// Attendance Page
+import Attendance from "./pages/Attendance";
+
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <SidebarProvider>
     <div className="flex min-h-screen w-full bg-background">
@@ -82,6 +85,8 @@ const App = () => {
             <Route path="/time-off/allowances" element={<AppLayout><Allowances /></AppLayout>} />
             
             <Route path="/notifications" element={<AppLayout><NotificationsActivity /></AppLayout>} />
+
+            <Route path="/attendance" element={<AppLayout><Attendance /></AppLayout>} />
 
             <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
           </Routes>
