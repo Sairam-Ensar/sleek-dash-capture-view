@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,18 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Plus, Download, MoreHorizontal } from "lucide-react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { MoreHorizontal } from "lucide-react";
+import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
+import { Button } from "@/components/ui/button";
 
 // Dummy skills data
 const skills = [
@@ -32,34 +25,25 @@ const skills = [
 ];
 
 export default function Skills() {
+  const handleAddSkill = () => {
+    // Implementation for adding a new skill
+    console.log("Add skill clicked");
+  };
+
+  const handleExport = async () => {
+    // Implementation for exporting skills
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
         <h1 className="text-2xl font-bold text-gray-900">Skills & Expertise</h1>
-        <div className="flex flex-col md:flex-row items-end md:items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            AGENT
-          </Button>
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            HELP DESK
-          </Button>
-          <Button 
-            className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
-          >
-            <Plus className="h-4 w-4" />
-            ADD SKILLS
-          </Button>
-          <Button variant="outline" className="border-gray-300 text-gray-600 px-4 rounded-full gap-2">
-            <Download className="h-4 w-4" />
-            EXPORT TO CSV
-          </Button>
-        </div>
+        <ActionButtonsLayout
+          onAdd={handleAddSkill}
+          onExport={handleExport}
+          addLabel="ADD SKILLS"
+        />
       </div>
 
       <div className="mb-6">

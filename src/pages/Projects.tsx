@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,10 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Download, Plus, ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
+import { Button } from "@/components/ui/button";
 
 // Dummy project data
 const projects = [
@@ -45,42 +46,34 @@ const projects = [
 ];
 
 export default function Projects() {
+  const handleAddProject = () => {
+    // Implementation for adding a new project
+    console.log("Add project clicked");
+  };
+
+  const handleExport = async () => {
+    // Implementation for exporting projects
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
+  const handleImport = async () => {
+    // Implementation for importing projects
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
-      {/* Header section */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
         <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            AGENT
-          </Button>
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            HELP DESK
-          </Button>
-          <Button 
-            className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
-          >
-            <Plus className="h-4 w-4" />
-            ADD PROJECT
-          </Button>
-          <Button variant="outline" className="border-gray-300 text-gray-600 px-4 rounded-full gap-2">
-            <Download className="h-4 w-4" />
-            EXPORT TO CSV
-          </Button>
-          <Button variant="outline" className="border-gray-300 text-gray-600 px-4 rounded-full gap-2">
-            <ArrowUpDown className="h-4 w-4" />
-            IMPORT DATA
-          </Button>
-        </div>
+        <ActionButtonsLayout
+          onAdd={handleAddProject}
+          onExport={handleExport}
+          onImport={handleImport}
+          addLabel="ADD PROJECT"
+          showImport
+        />
       </div>
 
-      {/* Search section */}
       <div className="mb-6">
         <Input
           type="text"
@@ -89,7 +82,6 @@ export default function Projects() {
         />
       </div>
 
-      {/* Projects table */}
       <Card className="bg-white/90 rounded-2xl shadow-lg p-4">
         <div className="overflow-x-auto">
           <Table>
