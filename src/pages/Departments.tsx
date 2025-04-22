@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -54,19 +53,19 @@ export default function Departments() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Department Name</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {departments.map((department, index) => (
                 <TableRow key={index} className="hover:bg-gray-50">
+                  <TableCell className="font-medium">{department.name}</TableCell>
                   <TableCell>
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </TableCell>
-                  <TableCell className="font-medium">{department.name}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

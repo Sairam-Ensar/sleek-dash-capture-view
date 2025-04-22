@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -52,21 +51,21 @@ export default function Designations() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Designation</TableHead>
                 <TableHead>Department</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {designations.map((designation, index) => (
                 <TableRow key={index} className="hover:bg-gray-50">
+                  <TableCell className="font-medium">{designation.title}</TableCell>
+                  <TableCell>{designation.department}</TableCell>
                   <TableCell>
                     <Button size="icon" variant="ghost" className="rounded-full">
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </TableCell>
-                  <TableCell className="font-medium">{designation.title}</TableCell>
-                  <TableCell>{designation.department}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

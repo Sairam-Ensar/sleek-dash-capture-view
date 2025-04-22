@@ -64,13 +64,13 @@ export default function Learning() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>% Of Completion</TableHead>
                 <TableHead>Start Date</TableHead>
                 <TableHead>End Date</TableHead>
                 <TableHead>Watched Link</TableHead>
                 <TableHead>Evidence Document</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

@@ -64,13 +64,13 @@ export default function Educations() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Education</TableHead>
                 <TableHead>Specification</TableHead>
                 <TableHead>Institution</TableHead>
                 <TableHead>Start Year</TableHead>
                 <TableHead>End Year</TableHead>
                 <TableHead>Document</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

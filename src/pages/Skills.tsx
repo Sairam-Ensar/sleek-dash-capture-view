@@ -68,27 +68,27 @@ export default function Skills() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Employee Name</TableHead>
                 <TableHead>Skills</TableHead>
                 <TableHead>Expertise</TableHead>
                 <TableHead>Approved By</TableHead>
                 <TableHead>Approved Status</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {skills.map((skill, index) => (
                 <TableRow key={index} className="hover:bg-gray-50">
-                  <TableCell>
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </TableCell>
                   <TableCell className="font-medium">{skill.employeeName}</TableCell>
                   <TableCell>{skill.skills}</TableCell>
                   <TableCell>{skill.expertise}</TableCell>
                   <TableCell>{skill.approvedBy}</TableCell>
                   <TableCell>{skill.status}</TableCell>
+                  <TableCell>
+                    <Button size="icon" variant="ghost" className="rounded-full">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

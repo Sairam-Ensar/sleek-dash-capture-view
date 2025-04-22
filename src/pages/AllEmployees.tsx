@@ -139,22 +139,17 @@ export default function AllEmployees() {
           <Table>
             <TableHeader>
               <TableRow className="bg-muted">
-                <TableHead className="w-16 min-w-12">Actions</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Employee ID</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Date of Birth</TableHead>
                 <TableHead>Mobile</TableHead>
+                <TableHead className="w-16 min-w-12">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredEmployees.map((emp, idx) => (
                 <TableRow key={emp.id} className="hover:bg-blue-50 transition">
-                  <TableCell>
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal />
-                    </Button>
-                  </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <img
@@ -169,6 +164,11 @@ export default function AllEmployees() {
                   <TableCell>{emp.email}</TableCell>
                   <TableCell>{emp.dob}</TableCell>
                   <TableCell>{emp.mobile}</TableCell>
+                  <TableCell>
+                    <Button size="icon" variant="ghost" className="rounded-full">
+                      <MoreHorizontal />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
               {filteredEmployees.length === 0 && (

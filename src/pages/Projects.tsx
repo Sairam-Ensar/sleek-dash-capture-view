@@ -90,7 +90,6 @@ export default function Projects() {
                 <TableHead className="w-10">
                   <ChevronDown className="h-4 w-4" />
                 </TableHead>
-                <TableHead>Actions</TableHead>
                 <TableHead>Project</TableHead>
                 <TableHead>Start Date</TableHead>
                 <TableHead>End Date</TableHead>
@@ -103,6 +102,7 @@ export default function Projects() {
                 <TableHead>Status</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Doc</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -110,11 +110,6 @@ export default function Projects() {
                 <TableRow key={index} className="hover:bg-gray-50">
                   <TableCell>
                     <ChevronDown className="h-4 w-4" />
-                  </TableCell>
-                  <TableCell>
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
                   </TableCell>
                   <TableCell className="font-medium">{project.name}</TableCell>
                   <TableCell>{project.startDate}</TableCell>
@@ -128,6 +123,11 @@ export default function Projects() {
                   <TableCell>{project.status}</TableCell>
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{project.docs}</TableCell>
+                  <TableCell>
+                    <Button size="icon" variant="ghost" className="rounded-full">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

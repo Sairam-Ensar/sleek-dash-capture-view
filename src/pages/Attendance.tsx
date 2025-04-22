@@ -79,23 +79,18 @@ export default function Attendance() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Employee Name</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead>Check In</TableHead>
                 <TableHead>Check Out</TableHead>
                 <TableHead>Total Hours</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {attendanceData.map((record, index) => (
                 <TableRow key={index} className="hover:bg-gray-50">
-                  <TableCell>
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </TableCell>
                   <TableCell className="font-medium">{record.employeeName}</TableCell>
                   <TableCell>{record.date}</TableCell>
                   <TableCell>{record.checkIn}</TableCell>
@@ -105,6 +100,11 @@ export default function Attendance() {
                     <span className="status-badge status-badge-success">
                       {record.status}
                     </span>
+                  </TableCell>
+                  <TableCell>
+                    <Button size="icon" variant="ghost" className="rounded-full">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

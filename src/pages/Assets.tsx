@@ -68,7 +68,6 @@ export default function Assets() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead>Actions</TableHead>
                 <TableHead>Invoice Number</TableHead>
                 <TableHead>Invoice Date</TableHead>
                 <TableHead>Asset Type</TableHead>
@@ -77,6 +76,7 @@ export default function Assets() {
                 <TableHead>Processor</TableHead>
                 <TableHead>RAM</TableHead>
                 <TableHead>Hard Disk</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
