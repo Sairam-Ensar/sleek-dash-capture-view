@@ -1,4 +1,3 @@
-
 import { Bell, LifeBuoy, HelpCircle, User, LogOut, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -29,20 +28,6 @@ export function Header() {
       </div>
       
       <div className="flex items-center gap-3">
-        {/* Agent Support Button */}
-        <Button variant="outline" size="sm" className="flex items-center gap-2">
-          <LifeBuoy className="h-4 w-4" />
-          <span className="hidden sm:inline">Agent</span>
-        </Button>
-        
-        {/* Help Desk Button */}
-        <Link to="/help">
-          <Button variant="outline" size="sm" className="flex items-center gap-2">
-            <HelpCircle className="h-4 w-4" />
-            <span className="hidden sm:inline">Help Desk</span>
-          </Button>
-        </Link>
-        
         {/* Notifications */}
         <Link to="/notifications">
           <Button variant="ghost" size="icon" className="rounded-full">

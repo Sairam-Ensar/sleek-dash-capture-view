@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -34,9 +35,33 @@ import {
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
+import { ActionDialog } from "@/components/ui/action-dialog";
+import { Button } from "@/components/ui/button";
 
-const premiumSidebarBg = "bg-gradient-to-br from-blue-200/90 via-white/80 to-purple-100/70 backdrop-blur-xl border-r border-blue-200/50 shadow-2xl";
-const sidebarSection = "rounded-xl bg-white/60 shadow-md p-4 my-3";
+const premiumSidebarBg = "bg-gradient-to-br from-[#E5DEFF] via-[#e9e4fa] to-[#F1F6FF] border-r border-[#d3bfff]/40 shadow-[0_4px_32px_rgba(120,100,255,0.06)]";
+const sidebarSection = "rounded-2xl glass-morphism bg-gradient-to-tr from-white/60 via-[#f7fafe]/70 to-[#ece7ff]/90 shadow-lg p-5 my-5 border border-[#ede8fe] backdrop-blur-md";
+
+const sidebarMenuActions = {
+  "Dashboard": ["View reports", "Create quick action"],
+  "My Profile": ["View profile", "Edit info", "Change password"],
+  "All Employees": ["Add new employee", "Import", "Export"],
+  "Projects": ["Create project", "Manage teams"],
+  "Time Off": ["View summary", "Apply for leave"],
+  "Time Off Overview": ["Request time off", "Check calendar"],
+  "Holidays": ["Add holiday", "Sync calendar"],
+  "Leave Requests": ["Approve leave", "Reject leave", "Comment"],
+  "Allowances": ["Edit allowances", "View balance"],
+  "Departments": ["Add department", "Edit", "Remove"],
+  "Designations": ["Add designation", "Batch import"],
+  "Skills & Expertise": ["Add skill", "Edit skill"],
+  "Educations": ["Add education", "Remove entry"],
+  "Learning": ["View trainings", "Enroll in course"],
+  "Attendance": ["Mark attendance", "Download report"],
+  "Assets": ["Assign asset", "Return asset"],
+  "Templates": ["Create template", "Edit template"],
+  "Notifications": ["Mark all read", "Settings"],
+  "Help Center": ["Contact support", "View FAQ"],
+};
 
 const menuItems = [
   { title: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -65,59 +90,61 @@ const additionalItems = [
   { title: "Help Center", icon: HelpCircle, path: "/help" },
 ];
 
-const MenuItem = ({ item, isActive }: { item: { title: string; icon: any; path: string }, isActive: boolean }) => {
+const MenuItemWithPopup = ({ item, isActive }: { item: { title: string; icon: any; path: string }, isActive: boolean }) => {
+  const [open, setOpen] = useState(false);
   const Icon = item.icon;
-  
+
   return (
-    <SidebarMenuItem>
-      <SidebarMenuButton 
-        asChild 
-        tooltip={item.title}
-        isActive={isActive}
-        className={cn(
-          "gap-3 rounded-xl px-4 py-2 shadow hover:scale-105 transition-all duration-300",
-          isActive 
-            ? "bg-gradient-to-r from-primary/80 to-blue-600/90 font-bold text-white shadow-lg" 
-            : "bg-white/40 text-sidebar-foreground"
-        )}
-      >
-        <Link
-          to={item.path}
+    <>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          asChild
+          tooltip={item.title}
+          isActive={isActive}
           className={cn(
-            "flex items-center gap-3 w-full",
-            isActive 
-              ? ""
-              : "hover:bg-blue-100/40 hover:text-primary"
+            "gap-3 rounded-2xl font-bold transition-all duration-200 shadow-md hover:scale-105 px-5 py-3 border-2",
+            isActive
+              ? "bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-400 text-white border-indigo-300 shadow-2xl"
+              : "bg-gradient-to-r from-white/50 via-[#ece7ff]/60 to-[#e3ecff]/80 text-[#4B389F] hover:text-purple-900 border-[#e5e0f7]"
           )}
+          onClick={(e) => {
+            e.preventDefault();
+            setOpen(true);
+          }}
         >
-          <span className={cn(
-            "flex items-center justify-center p-2 rounded-lg transition-all duration-200",
-            isActive 
-              ? "text-white bg-gradient-to-r from-primary to-blue-800 shadow-md" 
-              : "text-sidebar-foreground bg-sidebar-accent/80 group-hover:bg-primary/10"
-          )}>
-            <Icon className="h-5 w-5" />
+          <span
+            className={cn(
+              "flex items-center justify-center p-2 rounded-xl transition-all duration-200",
+              isActive ? "bg-gradient-to-r from-purple-700 to-blue-600 text-white shadow-xl" : "bg-gradient-to-r from-white/50 via-purple-100/30 to-indigo-100/50 text-indigo-500"
+            )}
+          >
+            <Icon className="h-6 w-6" />
           </span>
-          <span className={cn(
-            "font-medium text-base",
-            isActive ? "scale-105" : ""
-          )}>
-            {item.title}
-          </span>
-          {isActive && (
-            <span className="absolute right-0 h-full w-1 bg-gradient-to-b from-primary/90 to-blue-500/90 rounded-l-md animate-pulse-slow" />
-          )}
-        </Link>
-      </SidebarMenuButton>
-    </SidebarMenuItem>
+          <span className={cn("font-semibold text-lg", isActive ? "text-white" : "text-indigo-900")}>{item.title}</span>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+
+      {/* Popup for actions on menu click */}
+      <ActionDialog
+        title={item.title + " Actions"}
+        open={open}
+        onOpenChange={setOpen}
+        size="md"
+        className="rounded-3xl"
+      >
+        <div className="flex flex-col gap-3 pt-2 pb-4">
+          {sidebarMenuActions[item.title]?.map((action) => (
+            <Button key={action} variant="outline" className="font-semibold flex justify-start text-indigo-700 hover:bg-indigo-100 transition">{action}</Button>
+          ))}
+        </div>
+      </ActionDialog>
+    </>
   );
 };
 
 export function AppSidebar() {
   const location = useLocation();
-  const [timeOffOpen, setTimeOffOpen] = useState(
-    location.pathname.includes("/time-off")
-  );
+  const [timeOffOpen, setTimeOffOpen] = useState(location.pathname.includes("/time-off"));
 
   const isActive = (path: string) => {
     if (path === "/time-off") {
@@ -128,67 +155,65 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-6 border-b-0">
-        <div className="flex items-center gap-4 px-2">
-          <Link 
-            to="/dashboard" 
-            className="flex items-center gap-3 glass-morphism px-3 py-2 rounded-2xl hover:scale-105 transition"
+      <SidebarHeader className="p-8 border-b-0">
+        <div className="flex items-center gap-5 px-2">
+          <Link
+            to="/dashboard"
+            className="flex items-center gap-3 px-4 py-2 rounded-2xl hover:scale-110 transition font-extrabold bg-gradient-to-br from-indigo-400/90 via-purple-200/60 to-white shadow-2xl border border-indigo-200/70"
           >
-            <div className="p-2 rounded-full bg-gradient-to-br from-primary to-blue-700 shadow-xl">
-              <Shield className="h-7 w-7 text-white" />
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-primary to-purple-400/90 shadow-2xl">
+              <Shield className="h-9 w-9 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-xl bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
-                Ensar HR
-              </span>
-              <span className="text-xs text-muted-foreground font-semibold tracking-wide">Enterprise Edition</span>
+              <span className="bg-gradient-to-r from-indigo-900 via-purple-700 to-blue-400 bg-clip-text text-transparent font-extrabold text-2xl drop-shadow">Ensar HR</span>
+              <span className="text-sm text-indigo-600 font-bold tracking-wider uppercase">Enterprise Edition</span>
             </div>
           </Link>
         </div>
       </SidebarHeader>
-      <SidebarContent className={premiumSidebarBg + " px-5 py-4 min-h-screen rounded-r-3xl"}>
+      <SidebarContent className={premiumSidebarBg + " px-7 py-8 min-h-screen rounded-r-3xl"}>
         <SidebarMenu>
           <div className={sidebarSection}>
             {menuItems.map((item) => (
-              <MenuItem 
-                key={item.path} 
-                item={item} 
-                isActive={isActive(item.path)} 
+              <MenuItemWithPopup
+                key={item.path}
+                item={item}
+                isActive={isActive(item.path)}
               />
             ))}
           </div>
 
           <div className={sidebarSection}>
             <SidebarMenuItem>
-              <Collapsible 
-                open={timeOffOpen} 
+              <Collapsible
+                open={timeOffOpen}
                 onOpenChange={setTimeOffOpen}
                 className="w-full"
               >
                 <CollapsibleTrigger className="w-full">
-                  <SidebarMenuButton 
+                  <SidebarMenuButton
                     className={cn(
-                      "flex items-center justify-between w-full rounded-xl px-4 py-2 font-semibold",
-                      isActive("/time-off") 
-                        ? "bg-gradient-to-r from-primary to-blue-700 text-white shadow-lg" 
-                        : "bg-white/40 text-sidebar-foreground"
+                      "flex items-center justify-between w-full rounded-2xl px-5 py-3 font-bold transition duration-200",
+                      isActive("/time-off")
+                        ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-xl border-2 border-indigo-200"
+                        : "bg-white/40 text-[#5443c6]"
                     )}
                     isActive={isActive("/time-off")}
                   >
                     <div className="flex items-center gap-3">
                       <span className={cn(
-                        "flex items-center justify-center p-2 rounded-lg",
-                        isActive("/time-off") 
-                          ? "text-white bg-gradient-to-r from-primary to-blue-800" 
-                          : "text-sidebar-foreground bg-sidebar-accent/90 group-hover:bg-primary/10"
+                        "flex items-center justify-center p-2 rounded-xl",
+                        isActive("/time-off")
+                          ? "bg-gradient-to-r from-purple-700 to-blue-600 text-white shadow-lg"
+                          : "bg-gradient-to-r from-white/60 to-indigo-100 text-indigo-500"
                       )}>
-                        <Clock className="h-5 w-5" />
+                        <Clock className="h-6 w-6" />
                       </span>
-                      <span className="font-bold text-base">Time Off</span>
+                      <span className="font-extrabold text-lg">Time Off</span>
                     </div>
                     <svg
-                      width="18"
-                      height="18"
+                      width="20"
+                      height="20"
                       viewBox="0 0 16 16"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -204,32 +229,13 @@ export function AppSidebar() {
                     </svg>
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
-                <CollapsibleContent className="pl-10 mt-2 space-y-1 animate-slide-in-right border-l-2 border-blue-200/60">
+                <CollapsibleContent className="pl-12 mt-2 space-y-2 animate-slide-in-right border-l-2 border-indigo-300/60">
                   {timeOffItems.map((item) => (
-                    <SidebarMenuItem key={item.path}>
-                      <SidebarMenuButton 
-                        asChild 
-                        tooltip={item.title}
-                        variant="outline"
-                        size="sm"
-                        isActive={location.pathname === item.path}
-                        className={cn("rounded-lg px-2 py-2", location.pathname === item.path ? "bg-blue-100 font-bold" : "bg-white/70")}
-                      >
-                        <Link
-                          to={item.path}
-                          className={cn(
-                            "flex items-center gap-2 w-full text-base",
-                            "hover:bg-blue-200/30 hover:text-primary transition rounded-lg px-2",
-                            location.pathname === item.path 
-                              ? "font-bold text-blue-700" 
-                              : "text-sidebar-foreground"
-                          )}
-                        >
-                          <item.icon className="h-4 w-4" />
-                          <span>{item.title}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                    <MenuItemWithPopup
+                      key={item.path}
+                      item={item}
+                      isActive={location.pathname === item.path}
+                    />
                   ))}
                 </CollapsibleContent>
               </Collapsible>
@@ -238,23 +244,26 @@ export function AppSidebar() {
 
           <div className={sidebarSection}>
             {additionalItems.map((item) => (
-              <MenuItem 
-                key={item.path} 
-                item={item} 
-                isActive={isActive(item.path)} 
+              <MenuItemWithPopup
+                key={item.path}
+                item={item}
+                isActive={isActive(item.path)}
               />
             ))}
           </div>
         </SidebarMenu>
-        
-        <div className="mt-7 px-2">
-          <div className="p-5 rounded-2xl glass-morphism bg-gradient-to-br from-primary/30 to-blue-500/30 border border-primary/10 shadow-lg">
-            <h4 className="font-bold text-base mb-2 text-gradient-primary">Premium Support</h4>
+
+        <div className="mt-8 px-3">
+          <div className="p-6 rounded-3xl bg-gradient-to-tl from-indigo-200/40 via-white/60 to-purple-100 shadow-xl border border-indigo-100">
+            <h4 className="text-lg font-bold mb-2 text-gradient-primary">Premium Support</h4>
             <p className="text-xs text-muted-foreground mb-3 font-medium">Need help? Our premium support team is just a click away</p>
-            <Link to="/help" className="text-xs font-semibold text-primary hover:underline">Contact Support →</Link>
+            <Link to="/help" className="text-xs font-semibold text-indigo-700 hover:underline">Contact Support →</Link>
           </div>
         </div>
       </SidebarContent>
     </Sidebar>
   );
 }
+
+// The file is now premium styled and menu items open popups with actions.
+// Please consider splitting this file into smaller, focused components for maintainability!
