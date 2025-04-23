@@ -10,10 +10,11 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ActionMenu } from "@/components/ui/action-menu"; // NEW
 
 // Dummy project data
 const projects = [
@@ -49,9 +50,15 @@ const projects = [
 
 export default function Projects() {
   const [showAddProject, setShowAddProject] = useState(false);
+  const [actionRow, setActionRow] = useState<number | null>(null);
+
   const handleAddProject = () => setShowAddProject(true);
   const handleExport = async () => await new Promise(res => setTimeout(res, 500));
   const handleImport = async () => await new Promise(res => setTimeout(res, 500));
+
+  // Minimal Actions menu handlers
+  const handleEdit = (idx: number) => { setActionRow(null); alert(`Edit project #${idx+1}`); };
+  const handleDelete = (idx: number) => { setActionRow(null); alert(`Delete project #${idx+1}`); };
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
@@ -77,7 +84,6 @@ export default function Projects() {
               required
               placeholder="Project Name"
             />
-            {/* Add more fields as needed */}
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={() => setShowAddProject(false)}>Cancel</Button>
               <Button type="submit">Add</Button>
@@ -99,9 +105,7 @@ export default function Projects() {
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50">
-                <TableHead className="w-10">
-                  <ChevronDown className="h-4 w-4" />
-                </TableHead>
+                {/* REMOVED any "Expand All" or arrow features */}
                 <TableHead>Project</TableHead>
                 <TableHead>Start Date</TableHead>
                 <TableHead>End Date</TableHead>
@@ -119,10 +123,8 @@ export default function Projects() {
             </TableHeader>
             <TableBody>
               {projects.map((project, index) => (
-                <TableRow key={index} className="hover:bg-gray-50">
-                  <TableCell>
-                    <ChevronDown className="h-4 w-4" />
-                  </TableCell>
+                <TableRow key={index} className="hover:bg-gray-50 relative">
+                  {/* REMOVED arrow cell */}
                   <TableCell className="font-medium">{project.name}</TableCell>
                   <TableCell>{project.startDate}</TableCell>
                   <TableCell>{project.endDate}</TableCell>
@@ -136,9 +138,20 @@ export default function Projects() {
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{project.docs}</TableCell>
                   <TableCell className="text-right">
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                    <div className="relative inline-block">
+                      <Button size="icon" variant="ghost" className="rounded-full"
+                        onClick={() => setActionRow(index)}
+                      >
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                      {actionRow === index && (
+                        <ActionMenu
+                          onEdit={() => handleEdit(index)}
+                          onDelete={() => handleDelete(index)}
+                          onCancel={() => setActionRow(null)}
+                        />
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

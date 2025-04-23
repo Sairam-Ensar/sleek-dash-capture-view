@@ -1,3 +1,5 @@
+
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,7 +11,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Plus, Download, Upload } from "lucide-react";
+import { Plus, Download, Upload, MoreHorizontal } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ActionMenu } from "@/components/ui/action-menu";
 import {
   Pagination,
   PaginationContent,
@@ -20,6 +24,12 @@ import {
 } from "@/components/ui/pagination";
 
 export default function Assets() {
+  const [showAdd, setShowAdd] = useState(false);
+  const [actionRow, setActionRow] = useState<number | null>(null);
+
+  const handleEdit = (idx: number) => { setActionRow(null); alert(`Edit asset #${idx + 1}`); };
+  const handleDelete = (idx: number) => { setActionRow(null); alert(`Delete asset #${idx + 1}`); };
+
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
@@ -27,6 +37,7 @@ export default function Assets() {
         <div className="flex flex-col md:flex-row items-end md:items-center gap-4">
           <Button 
             className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
+            onClick={() => setShowAdd(true)}
           >
             <Plus className="h-4 w-4" />
             ADD ASSET
@@ -41,6 +52,30 @@ export default function Assets() {
           </Button>
         </div>
       </div>
+
+      <Dialog open={showAdd} onOpenChange={setShowAdd}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Asset</DialogTitle>
+          </DialogHeader>
+          <form className="space-y-4">
+            <Input required placeholder="Invoice Number" />
+            <Input required placeholder="Invoice Date" />
+            <Input required placeholder="Asset Type" />
+            <Input required placeholder="Make" />
+            <Input required placeholder="Quantity" />
+            <Input required placeholder="Processor" />
+            <Input required placeholder="RAM" />
+            <Input required placeholder="Hard Disk" />
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" onClick={() => setShowAdd(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Add</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <div className="mb-6">
         <Input
@@ -67,9 +102,31 @@ export default function Assets() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell colSpan={9} className="text-center py-8 text-gray-500">
-                  No Data Found.
+              {/* Dummy row with Actions */}
+              <TableRow className="relative">
+                <TableCell>No Data Found.</TableCell>
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell className="text-right">
+                  <div className="relative inline-block">
+                    <Button size="icon" variant="ghost" className="rounded-full"
+                      onClick={() => setActionRow(0)}
+                    >
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                    {actionRow === 0 && (
+                      <ActionMenu
+                        onEdit={() => handleEdit(0)}
+                        onDelete={() => handleDelete(0)}
+                        onCancel={() => setActionRow(null)}
+                      />
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             </TableBody>

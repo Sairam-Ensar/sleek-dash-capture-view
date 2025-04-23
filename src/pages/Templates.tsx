@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PremiumButton } from "@/components/ui/premium-button";
@@ -70,7 +69,6 @@ const letterTypes = [
   }
 ];
 
-// Sample saved templates
 const savedTemplates = [
   {
     id: "1",
@@ -101,22 +99,18 @@ export default function Templates() {
   const confirmDelete = () => {
     toast.success("Template deleted successfully");
     setOpenDeleteDialog(false);
-    // In a real app, you would delete the template from your database here
   };
 
   const handleDuplicate = (id: string) => {
     toast.success("Template duplicated successfully");
-    // In a real app, you would duplicate the template in your database here
   };
 
   const handlePreview = (id: string) => {
     toast.success("Opening template preview");
-    // In a real app, you would show a preview of the template here
   };
 
   const handleEdit = (id: string) => {
     toast.success("Opening template editor");
-    // In a real app, you would open the template editor here
   };
 
   return (
@@ -208,10 +202,25 @@ export default function Templates() {
           <div className="bg-white rounded-lg shadow-sm border p-6 mb-6 animate-fade-in">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Your Templates</h2>
-              <PremiumButton size="sm">
-                <Plus className="h-4 w-4" />
-                New Template
-              </PremiumButton>
+              <Dialog>
+                <Dialog.Trigger asChild>
+                  <PremiumButton size="sm">
+                    <Plus className="h-4 w-4" />
+                    New Template
+                  </PremiumButton>
+                </Dialog.Trigger>
+                <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden">
+                  <DialogHeader className="p-6 bg-gradient-to-r from-primary/5 to-primary/10 border-b">
+                    <DialogTitle className="flex items-center gap-2">
+                      <Plus className="h-5 w-5 text-primary" />
+                      Create Template
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="p-6">
+                    <CreateLetterForm type="offer" />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
             
             <div className="bg-gray-50 rounded-md">
@@ -282,7 +291,6 @@ export default function Templates() {
         </>
       )}
 
-      {/* Delete Confirmation Dialog */}
       <ActionDialog
         title="Delete Template"
         description="Are you sure you want to delete this template? This action cannot be undone."

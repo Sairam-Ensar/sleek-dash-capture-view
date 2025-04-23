@@ -1,3 +1,5 @@
+
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Plus, Download, MoreHorizontal, Clock } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ActionMenu } from "@/components/ui/action-menu";
 import {
   Pagination,
   PaginationContent,
@@ -32,6 +36,13 @@ const attendanceData = [
 ];
 
 export default function Attendance() {
+  const [showMark, setShowMark] = useState(false);
+  const [actionRow, setActionRow] = useState<number | null>(null);
+
+  const handleEdit = (idx: number) => { setActionRow(null); alert(`Edit attendance #${idx + 1}`); };
+  const handleDelete = (idx: number) => { setActionRow(null); alert(`Delete attendance #${idx + 1}`); };
+
+
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
@@ -54,6 +65,7 @@ export default function Attendance() {
           </Button>
           <Button 
             className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
+            onClick={() => setShowMark(true)}
           >
             <Plus className="h-4 w-4" />
             MARK ATTENDANCE
@@ -64,6 +76,27 @@ export default function Attendance() {
           </Button>
         </div>
       </div>
+
+      <Dialog open={showMark} onOpenChange={setShowMark}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Mark Attendance</DialogTitle>
+          </DialogHeader>
+          <form className="space-y-4">
+            <Input required placeholder="Employee Name" />
+            <Input required placeholder="Date" />
+            <Input required placeholder="Check In" />
+            <Input required placeholder="Check Out" />
+            <Input required placeholder="Status" />
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" onClick={() => setShowMark(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Mark</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <div className="mb-6">
         <Input
@@ -89,7 +122,7 @@ export default function Attendance() {
             </TableHeader>
             <TableBody>
               {attendanceData.map((record, index) => (
-                <TableRow key={index} className="hover:bg-gray-50">
+                <TableRow key={index} className="hover:bg-gray-50 relative">
                   <TableCell className="font-medium">{record.employeeName}</TableCell>
                   <TableCell>{record.date}</TableCell>
                   <TableCell>{record.checkIn}</TableCell>
@@ -101,9 +134,20 @@ export default function Attendance() {
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                    <div className="relative inline-block">
+                      <Button size="icon" variant="ghost" className="rounded-full"
+                        onClick={() => setActionRow(index)}
+                      >
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                      {actionRow === index && (
+                        <ActionMenu
+                          onEdit={() => handleEdit(index)}
+                          onDelete={() => handleDelete(index)}
+                          onCancel={() => setActionRow(null)}
+                        />
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
