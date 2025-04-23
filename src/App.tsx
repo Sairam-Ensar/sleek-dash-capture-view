@@ -73,6 +73,7 @@ const App = () => {
             <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
             <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
             <Route path="/employees" element={<AppLayout><AllEmployees /></AppLayout>} />
+            <Route path="/employees/:id" element={<AppLayout><Profile /></AppLayout>} />
             
             <Route path="/projects" element={<AppLayout><Projects /></AppLayout>} />
             

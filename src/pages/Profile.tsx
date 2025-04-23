@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Pen } from "lucide-react";
-import { toast } from "sonner"; // Import toast from sonner
+import { toast } from "sonner";
+import { EditableSection } from "@/components/ui/editable-section";
+import { PageHeader } from "@/components/ui/page-header";
 
 const DEFAULT_PROFILE_IMAGE = "/lovable-uploads/602f4d60-71af-476c-b318-9b981387be9e.png";
 
@@ -53,7 +55,12 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
-      <h1 className="text-2xl font-bold text-[#222741] mb-10 px-2">My Profile</h1>
+      <PageHeader 
+        title="My Profile" 
+        description="View and edit your personal information"
+        showBackButton
+      />
+      
       <div className="flex justify-center items-start gap-8 flex-col xl:flex-row">
         {/* Profile Card */}
         <Card className="w-full max-w-xs mx-auto bg-white/90 rounded-2xl shadow-xl px-6 py-10 flex flex-col items-center">
@@ -88,111 +95,114 @@ export default function Profile() {
             Save
           </Button>
         </Card>
+        
         {/* Profile Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="grid flex-1 grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto bg-white/90 rounded-2xl shadow-xl px-6 py-10"
-          autoComplete="off"
-        >
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="name" className="text-gray-700 mb-1">Full Name</Label>
-            <Input
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#9b87f5] font-medium"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="email" className="text-gray-700 mb-1">Email Address</Label>
-            <Input
-              id="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#1EAEDB] font-medium"
-              type="email"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="phone" className="text-gray-700 mb-1">Phone Number</Label>
-            <Input
-              id="phone"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#33C3F0]"
-              type="tel"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="country" className="text-gray-700 mb-1">Country</Label>
-            <Input
-              id="country"
-              name="country"
-              value={form.country}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#33C3F0]"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="state" className="text-gray-700 mb-1">State/Region</Label>
-            <Input
-              id="state"
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#7E69AB]"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="city" className="text-gray-700 mb-1">City</Label>
-            <Input
-              id="city"
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#7E69AB]"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5 md:col-span-2">
-            <Label htmlFor="address" className="text-gray-700 mb-1">Address</Label>
-            <Input
-              id="address"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#1EAEDB]"
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <Label htmlFor="zip" className="text-gray-700 mb-1">ZIP code</Label>
-            <Input
-              id="zip"
-              name="zip"
-              value={form.zip}
-              onChange={handleChange}
-              className="bg-white border-2 border-gray-200 focus:border-[#9b87f5]"
-              autoComplete="off"
-              required
-            />
-          </div>
-        </form>
+        <EditableSection className="flex-1 w-full max-w-3xl mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full bg-white/90 rounded-2xl shadow-xl px-6 py-10"
+            autoComplete="off"
+          >
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="name" className="text-gray-700 mb-1">Full Name</Label>
+              <Input
+                id="name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#9b87f5] font-medium"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="email" className="text-gray-700 mb-1">Email Address</Label>
+              <Input
+                id="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#1EAEDB] font-medium"
+                type="email"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="phone" className="text-gray-700 mb-1">Phone Number</Label>
+              <Input
+                id="phone"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#33C3F0]"
+                type="tel"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="country" className="text-gray-700 mb-1">Country</Label>
+              <Input
+                id="country"
+                name="country"
+                value={form.country}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#33C3F0]"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="state" className="text-gray-700 mb-1">State/Region</Label>
+              <Input
+                id="state"
+                name="state"
+                value={form.state}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#7E69AB]"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="city" className="text-gray-700 mb-1">City</Label>
+              <Input
+                id="city"
+                name="city"
+                value={form.city}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#7E69AB]"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <Label htmlFor="address" className="text-gray-700 mb-1">Address</Label>
+              <Input
+                id="address"
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#1EAEDB]"
+                autoComplete="off"
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="zip" className="text-gray-700 mb-1">ZIP code</Label>
+              <Input
+                id="zip"
+                name="zip"
+                value={form.zip}
+                onChange={handleChange}
+                className="bg-white border-2 border-gray-200 focus:border-[#9b87f5]"
+                autoComplete="off"
+                required
+              />
+            </div>
+          </form>
+        </EditableSection>
       </div>
     </div>
   );
