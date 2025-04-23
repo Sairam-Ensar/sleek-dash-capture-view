@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -216,27 +215,6 @@ const Dashboard = () => {
               className="pl-9 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
             />
           </div>
-          <Button
-            size="sm"
-            className="ml-2 bg-blue-500 hover:bg-blue-600 text-white"
-            onClick={() => toast({
-              title: "Agent feature",
-              description: "AI assistant is coming soon!",
-            })}
-          >
-            AGENT
-          </Button>
-          <Button 
-            size="sm" 
-            variant="outline" 
-            className="ml-2"
-            onClick={() => toast({
-              title: "Help Desk",
-              description: "Support team notified, they will reach out shortly.",
-            })}
-          >
-            HELP DESK
-          </Button>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Table,
@@ -12,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronDown, MoreHorizontal } from "lucide-react";
 import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 // Dummy project data
 const projects = [
@@ -46,20 +48,10 @@ const projects = [
 ];
 
 export default function Projects() {
-  const handleAddProject = () => {
-    // Implementation for adding a new project
-    console.log("Add project clicked");
-  };
-
-  const handleExport = async () => {
-    // Implementation for exporting projects
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  };
-
-  const handleImport = async () => {
-    // Implementation for importing projects
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  };
+  const [showAddProject, setShowAddProject] = useState(false);
+  const handleAddProject = () => setShowAddProject(true);
+  const handleExport = async () => await new Promise(res => setTimeout(res, 500));
+  const handleImport = async () => await new Promise(res => setTimeout(res, 500));
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
@@ -71,8 +63,28 @@ export default function Projects() {
           onImport={handleImport}
           addLabel="ADD PROJECT"
           showImport
+          showExport
         />
       </div>
+
+      <Dialog open={showAddProject} onOpenChange={setShowAddProject}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add New Project</DialogTitle>
+          </DialogHeader>
+          <form className="space-y-4">
+            <Input
+              required
+              placeholder="Project Name"
+            />
+            {/* Add more fields as needed */}
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" onClick={() => setShowAddProject(false)}>Cancel</Button>
+              <Button type="submit">Add</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <div className="mb-6">
         <Input

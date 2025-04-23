@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { MoreHorizontal, Download, ArrowDown, ArrowUpDown, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const fallbackAvatars = [
   "/lovable-uploads/043cffa9-fc3a-4320-9d59-c843a95de8b0.png",
@@ -64,6 +65,8 @@ const status = {
 
 export default function AllEmployees() {
   const [search, setSearch] = useState("");
+  const [showAddEmployee, setShowAddEmployee] = useState(false);
+  const [newEmployee, setNewEmployee] = useState({ name: "", email: "" });
 
   const filteredEmployees = employees.filter(
     (emp) =>
@@ -71,6 +74,16 @@ export default function AllEmployees() {
       emp.email.toLowerCase().includes(search.toLowerCase()) ||
       emp.id.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleAddEmployee = () => setShowAddEmployee(true);
+
+  const handleEmployeeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newEmployee.name && newEmployee.email) {
+      setShowAddEmployee(false);
+      setNewEmployee({ name: "", email: "" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
@@ -89,7 +102,9 @@ export default function AllEmployees() {
             <ArrowUpDown className="w-4 h-4" />
             EXPORT DATA
           </Button>
-          <Button className="bg-gradient-to-r from-primary to-blue-700 text-white font-semibold px-5 rounded-full hover:from-blue-700 hover:to-blue-800">
+          <Button className="bg-gradient-to-r from-primary to-blue-700 text-white font-semibold px-5 rounded-full hover:from-blue-700 hover:to-blue-800"
+            onClick={handleAddEmployee}
+          >
             <Plus className="h-4 w-4" />
             ADD EMPLOYEE
           </Button>
@@ -179,6 +194,33 @@ export default function AllEmployees() {
           </div>
         </div>
       </Card>
+
+      <Dialog open={showAddEmployee} onOpenChange={setShowAddEmployee}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add New Employee</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleEmployeeSubmit} className="space-y-4">
+            <Input
+              required
+              placeholder="Employee Name"
+              value={newEmployee.name}
+              onChange={e => setNewEmployee(n => ({ ...n, name: e.target.value }))}
+            />
+            <Input
+              required
+              type="email"
+              placeholder="Email"
+              value={newEmployee.email}
+              onChange={e => setNewEmployee(n => ({ ...n, email: e.target.value }))}
+            />
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" type="button" onClick={() => setShowAddEmployee(false)}>Cancel</Button>
+              <Button type="submit">Add</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
