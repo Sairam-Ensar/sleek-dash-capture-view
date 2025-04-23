@@ -76,37 +76,23 @@ export default function AllEmployees() {
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5 px-2">
         <h1 className="text-2xl font-bold text-[#222741]">All Employees</h1>
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            AGENT
+        <div className="flex gap-2">
+          <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
+            <Download className="w-4 h-4" />
+            IMPORT DATA
           </Button>
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            HELP DESK
+          <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
+            <ArrowDown className="w-4 h-4" />
+            SAMPLE IMPORT
           </Button>
-          <div className="flex gap-2">
-            <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
-              <Download className="w-4 h-4" />
-              IMPORT DATA
-            </Button>
-            <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
-              <ArrowDown className="w-4 h-4" />
-              SAMPLE IMPORT
-            </Button>
-            <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
-              <ArrowUpDown className="w-4 h-4" />
-              EXPORT DATA
-            </Button>
-            <Button className="bg-gradient-to-r from-primary to-blue-700 text-white font-semibold px-5 rounded-full hover:from-blue-700 hover:to-blue-800">
-              <Plus className="h-4 w-4" />
-              ADD EMPLOYEE
-            </Button>
-          </div>
+          <Button variant="outline" className="border-red-300 text-red-500 px-3 rounded-full gap-2 hover:bg-red-50">
+            <ArrowUpDown className="w-4 h-4" />
+            EXPORT DATA
+          </Button>
+          <Button className="bg-gradient-to-r from-primary to-blue-700 text-white font-semibold px-5 rounded-full hover:from-blue-700 hover:to-blue-800">
+            <Plus className="h-4 w-4" />
+            ADD EMPLOYEE
+          </Button>
         </div>
       </div>
 

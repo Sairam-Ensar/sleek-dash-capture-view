@@ -25,18 +25,6 @@ export default function Assets() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
         <h1 className="text-2xl font-bold text-gray-900">Assets</h1>
         <div className="flex flex-col md:flex-row items-end md:items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            AGENT
-          </Button>
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            HELP DESK
-          </Button>
           <Button 
             className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
           >
