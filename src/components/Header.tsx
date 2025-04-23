@@ -1,4 +1,5 @@
-import { Bell, LifeBuoy, HelpCircle, User, LogOut, ChevronDown } from "lucide-react";
+
+import { Bell, LifeBuoy, HelpCircle, User, LogOut, ChevronDown, Headset, User as AgentIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
@@ -28,6 +29,22 @@ export function Header() {
       </div>
       
       <div className="flex items-center gap-3">
+        {/* AGENT button */}
+        <Button
+          variant="outline"
+          className="px-4 rounded-full flex items-center gap-2 border-indigo-500 text-indigo-600 font-semibold hover:bg-indigo-50"
+        >
+          <AgentIcon className="h-4 w-4" />
+          AGENT
+        </Button>
+        {/* HELP DESK button */}
+        <Button
+          variant="outline"
+          className="px-4 rounded-full flex items-center gap-2 border-indigo-500 text-indigo-600 font-semibold hover:bg-indigo-50"
+        >
+          <Headset className="h-4 w-4" />
+          HELP DESK
+        </Button>
         {/* Notifications */}
         <Link to="/notifications">
           <Button variant="ghost" size="icon" className="rounded-full">
@@ -65,3 +82,4 @@ export function Header() {
     </div>
   );
 }
+
