@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -36,6 +35,9 @@ import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
 
+const premiumSidebarBg = "bg-gradient-to-br from-blue-200/90 via-white/80 to-purple-100/70 backdrop-blur-xl border-r border-blue-200/50 shadow-2xl";
+const sidebarSection = "rounded-xl bg-white/60 shadow-md p-4 my-3";
+
 const menuItems = [
   { title: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
   { title: "My Profile", icon: User, path: "/profile" },
@@ -72,35 +74,38 @@ const MenuItem = ({ item, isActive }: { item: { title: string; icon: any; path: 
         asChild 
         tooltip={item.title}
         isActive={isActive}
+        className={cn(
+          "gap-3 rounded-xl px-4 py-2 shadow hover:scale-105 transition-all duration-300",
+          isActive 
+            ? "bg-gradient-to-r from-primary/80 to-blue-600/90 font-bold text-white shadow-lg" 
+            : "bg-white/40 text-sidebar-foreground"
+        )}
       >
         <Link
           to={item.path}
           className={cn(
-            "flex items-center gap-3 w-full transition-all duration-300",
-            "hover:bg-gradient-to-r hover:from-primary/10 hover:to-blue-500/5",
-            "hover:text-sidebar-accent-foreground group",
-            "rounded-md overflow-hidden",
+            "flex items-center gap-3 w-full",
             isActive 
-              ? "bg-gradient-to-r from-primary/20 to-blue-500/10 font-medium text-primary shadow-sm" 
-              : "text-sidebar-foreground"
+              ? ""
+              : "hover:bg-blue-100/40 hover:text-primary"
           )}
         >
           <span className={cn(
-            "flex items-center justify-center p-1.5 rounded-md transition-all duration-300",
+            "flex items-center justify-center p-2 rounded-lg transition-all duration-200",
             isActive 
-              ? "text-white bg-gradient-to-br from-primary to-blue-600 shadow-md" 
-              : "text-sidebar-foreground bg-sidebar-accent/50 group-hover:bg-primary/10"
+              ? "text-white bg-gradient-to-r from-primary to-blue-800 shadow-md" 
+              : "text-sidebar-foreground bg-sidebar-accent/80 group-hover:bg-primary/10"
           )}>
-            <Icon className="h-4 w-4" />
+            <Icon className="h-5 w-5" />
           </span>
           <span className={cn(
-            "font-medium transition-all duration-300",
+            "font-medium text-base",
             isActive ? "scale-105" : ""
           )}>
             {item.title}
           </span>
           {isActive && (
-            <span className="absolute right-0 h-full w-1 bg-primary rounded-l-md animate-pulse-slow" />
+            <span className="absolute right-0 h-full w-1 bg-gradient-to-b from-primary/90 to-blue-500/90 rounded-l-md animate-pulse-slow" />
           )}
         </Link>
       </SidebarMenuButton>
@@ -123,124 +128,130 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4">
-        <div className="flex items-center gap-3 px-2">
-          <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="p-1.5 rounded-md bg-gradient-to-br from-primary to-blue-700 shadow-md">
-              <Shield className="h-6 w-6 text-white" />
+      <SidebarHeader className="p-6 border-b-0">
+        <div className="flex items-center gap-4 px-2">
+          <Link 
+            to="/dashboard" 
+            className="flex items-center gap-3 glass-morphism px-3 py-2 rounded-2xl hover:scale-105 transition"
+          >
+            <div className="p-2 rounded-full bg-gradient-to-br from-primary to-blue-700 shadow-xl">
+              <Shield className="h-7 w-7 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-lg bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
+              <span className="font-extrabold text-xl bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">
                 Ensar HR
               </span>
-              <span className="text-xs text-muted-foreground">Enterprise Edition</span>
+              <span className="text-xs text-muted-foreground font-semibold tracking-wide">Enterprise Edition</span>
             </div>
           </Link>
         </div>
       </SidebarHeader>
-      <SidebarContent className="px-3">
+      <SidebarContent className={premiumSidebarBg + " px-5 py-4 min-h-screen rounded-r-3xl"}>
         <SidebarMenu>
-          {menuItems.map((item) => (
-            <MenuItem 
-              key={item.path} 
-              item={item} 
-              isActive={isActive(item.path)} 
-            />
-          ))}
+          <div className={sidebarSection}>
+            {menuItems.map((item) => (
+              <MenuItem 
+                key={item.path} 
+                item={item} 
+                isActive={isActive(item.path)} 
+              />
+            ))}
+          </div>
 
-          <SidebarMenuItem>
-            <Collapsible 
-              open={timeOffOpen} 
-              onOpenChange={setTimeOffOpen}
-              className="w-full"
-            >
-              <CollapsibleTrigger className="w-full">
-                <SidebarMenuButton 
-                  className={cn(
-                    "flex items-center justify-between w-full",
-                    "hover:bg-gradient-to-r hover:from-primary/10 hover:to-blue-500/5",
-                    "transition-all duration-300 group",
-                    isActive("/time-off") 
-                      ? "bg-gradient-to-r from-primary/20 to-blue-500/10 font-medium text-primary shadow-sm" 
-                      : "text-sidebar-foreground",
-                    "rounded-md"
-                  )}
-                  isActive={isActive("/time-off")}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={cn(
-                      "flex items-center justify-center p-1.5 rounded-md transition-all duration-300",
+          <div className={sidebarSection}>
+            <SidebarMenuItem>
+              <Collapsible 
+                open={timeOffOpen} 
+                onOpenChange={setTimeOffOpen}
+                className="w-full"
+              >
+                <CollapsibleTrigger className="w-full">
+                  <SidebarMenuButton 
+                    className={cn(
+                      "flex items-center justify-between w-full rounded-xl px-4 py-2 font-semibold",
                       isActive("/time-off") 
-                        ? "text-white bg-gradient-to-br from-primary to-blue-600 shadow-md" 
-                        : "text-sidebar-foreground bg-sidebar-accent/50 group-hover:bg-primary/10"
-                    )}>
-                      <Clock className="h-4 w-4" />
-                    </span>
-                    <span className="font-medium">Time Off</span>
-                  </div>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={cn("transition-transform duration-300", timeOffOpen && "transform rotate-180")}
+                        ? "bg-gradient-to-r from-primary to-blue-700 text-white shadow-lg" 
+                        : "bg-white/40 text-sidebar-foreground"
+                    )}
+                    isActive={isActive("/time-off")}
                   >
-                    <path
-                      d="M4 6L8 10L12 6"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="pl-10 mt-1 space-y-1 animate-slide-in-right">
-                {timeOffItems.map((item) => (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton 
-                      asChild 
-                      tooltip={item.title}
-                      variant="outline"
-                      size="sm"
-                      isActive={location.pathname === item.path}
+                    <div className="flex items-center gap-3">
+                      <span className={cn(
+                        "flex items-center justify-center p-2 rounded-lg",
+                        isActive("/time-off") 
+                          ? "text-white bg-gradient-to-r from-primary to-blue-800" 
+                          : "text-sidebar-foreground bg-sidebar-accent/90 group-hover:bg-primary/10"
+                      )}>
+                        <Clock className="h-5 w-5" />
+                      </span>
+                      <span className="font-bold text-base">Time Off</span>
+                    </div>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={cn("transition-transform duration-300", timeOffOpen && "transform rotate-180")}
                     >
-                      <Link
-                        to={item.path}
-                        className={cn(
-                          "flex items-center gap-2 w-full py-1.5",
-                          "hover:bg-sidebar-accent/50 hover:text-primary/80",
-                          "transition-all duration-300 rounded-md",
-                          location.pathname === item.path 
-                            ? "bg-sidebar-accent/70 font-medium text-primary border-l-2 border-primary pl-2" 
-                            : ""
-                        )}
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="pl-10 mt-2 space-y-1 animate-slide-in-right border-l-2 border-blue-200/60">
+                  {timeOffItems.map((item) => (
+                    <SidebarMenuItem key={item.path}>
+                      <SidebarMenuButton 
+                        asChild 
+                        tooltip={item.title}
+                        variant="outline"
+                        size="sm"
+                        isActive={location.pathname === item.path}
+                        className={cn("rounded-lg px-2 py-2", location.pathname === item.path ? "bg-blue-100 font-bold" : "bg-white/70")}
                       >
-                        <item.icon className="h-3.5 w-3.5" />
-                        <span className="text-sm">{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
+                        <Link
+                          to={item.path}
+                          className={cn(
+                            "flex items-center gap-2 w-full text-base",
+                            "hover:bg-blue-200/30 hover:text-primary transition rounded-lg px-2",
+                            location.pathname === item.path 
+                              ? "font-bold text-blue-700" 
+                              : "text-sidebar-foreground"
+                          )}
+                        >
+                          <item.icon className="h-4 w-4" />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
+            </SidebarMenuItem>
+          </div>
 
-          {additionalItems.map((item) => (
-            <MenuItem 
-              key={item.path} 
-              item={item} 
-              isActive={isActive(item.path)} 
-            />
-          ))}
+          <div className={sidebarSection}>
+            {additionalItems.map((item) => (
+              <MenuItem 
+                key={item.path} 
+                item={item} 
+                isActive={isActive(item.path)} 
+              />
+            ))}
+          </div>
         </SidebarMenu>
         
-        <div className="mt-8 px-4">
-          <div className="p-4 rounded-lg bg-gradient-to-br from-primary/5 to-blue-500/10 border border-primary/10 shadow-sm">
-            <h4 className="font-semibold text-sm mb-2">Premium Support</h4>
-            <p className="text-xs text-muted-foreground mb-3">Need help? Our premium support team is just a click away</p>
-            <Link to="/help" className="text-xs font-medium text-primary hover:underline">Contact Support →</Link>
+        <div className="mt-7 px-2">
+          <div className="p-5 rounded-2xl glass-morphism bg-gradient-to-br from-primary/30 to-blue-500/30 border border-primary/10 shadow-lg">
+            <h4 className="font-bold text-base mb-2 text-gradient-primary">Premium Support</h4>
+            <p className="text-xs text-muted-foreground mb-3 font-medium">Need help? Our premium support team is just a click away</p>
+            <Link to="/help" className="text-xs font-semibold text-primary hover:underline">Contact Support →</Link>
           </div>
         </div>
       </SidebarContent>
