@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableBody,
@@ -13,6 +14,8 @@ import { useState } from "react";
 import { MoreHorizontal, Download, ArrowDown, ArrowUpDown, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { EmployeeProfileLink } from "@/components/employee/EmployeeProfileLink";
+import { ActionMenu } from "@/components/ui/action-menu";
 
 const fallbackAvatars = [
   "/lovable-uploads/043cffa9-fc3a-4320-9d59-c843a95de8b0.png",
@@ -67,6 +70,7 @@ export default function AllEmployees() {
   const [search, setSearch] = useState("");
   const [showAddEmployee, setShowAddEmployee] = useState(false);
   const [newEmployee, setNewEmployee] = useState({ name: "", email: "" });
+  const [actionRow, setActionRow] = useState<number | null>(null);
 
   const filteredEmployees = employees.filter(
     (emp) =>
@@ -76,6 +80,8 @@ export default function AllEmployees() {
   );
 
   const handleAddEmployee = () => setShowAddEmployee(true);
+  const handleEdit = (idx: number) => { setActionRow(null); };
+  const handleDelete = (idx: number) => { setActionRow(null); };
 
   const handleEmployeeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,7 +155,7 @@ export default function AllEmployees() {
                         alt={emp.name}
                         className="w-9 h-9 rounded-full object-cover ring-2 ring-blue-200 bg-muted"
                       />
-                      <span className="font-medium">{emp.name}</span>
+                      <EmployeeProfileLink id={emp.id} name={emp.name} />
                     </div>
                   </TableCell>
                   <TableCell className="font-medium">{emp.id}</TableCell>
@@ -157,9 +163,20 @@ export default function AllEmployees() {
                   <TableCell>{emp.dob}</TableCell>
                   <TableCell>{emp.mobile}</TableCell>
                   <TableCell className="text-right">
-                    <Button size="icon" variant="ghost" className="rounded-full">
-                      <MoreHorizontal />
-                    </Button>
+                    <div className="relative inline-block">
+                      <Button size="icon" variant="ghost" className="rounded-full"
+                        onClick={() => setActionRow(idx)}
+                      >
+                        <MoreHorizontal />
+                      </Button>
+                      {actionRow === idx && (
+                        <ActionMenu
+                          onEdit={() => handleEdit(idx)}
+                          onDelete={() => handleDelete(idx)}
+                          onCancel={() => setActionRow(null)}
+                        />
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

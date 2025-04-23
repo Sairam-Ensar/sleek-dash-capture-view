@@ -22,10 +22,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { EmployeeProfileLink } from "@/components/employee/EmployeeProfileLink";
 
 // Dummy attendance data
 const attendanceData = [
   {
+    employeeId: "ES-500",
     employeeName: "John Doe",
     date: "2025-04-22",
     checkIn: "09:00 AM",
@@ -41,7 +43,6 @@ export default function Attendance() {
 
   const handleEdit = (idx: number) => { setActionRow(null); alert(`Edit attendance #${idx + 1}`); };
   const handleDelete = (idx: number) => { setActionRow(null); alert(`Delete attendance #${idx + 1}`); };
-
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] px-4 py-8 flex flex-col">
@@ -123,7 +124,9 @@ export default function Attendance() {
             <TableBody>
               {attendanceData.map((record, index) => (
                 <TableRow key={index} className="hover:bg-gray-50 relative">
-                  <TableCell className="font-medium">{record.employeeName}</TableCell>
+                  <TableCell className="font-medium">
+                    <EmployeeProfileLink id={record.employeeId} name={record.employeeName} />
+                  </TableCell>
                   <TableCell>{record.date}</TableCell>
                   <TableCell>{record.checkIn}</TableCell>
                   <TableCell>{record.checkOut}</TableCell>

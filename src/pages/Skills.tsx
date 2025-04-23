@@ -23,10 +23,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { EmployeeProfileLink } from "@/components/employee/EmployeeProfileLink";
 
 // Dummy skills data
 const skills = [
   {
+    employeeId: "ES5",
     employeeName: "Nikhil Samanthula",
     skills: "React",
     expertise: "Expert",
@@ -98,7 +100,9 @@ export default function Skills() {
             <TableBody>
               {skills.map((skill, index) => (
                 <TableRow key={index} className="hover:bg-gray-50 relative">
-                  <TableCell className="font-medium">{skill.employeeName}</TableCell>
+                  <TableCell className="font-medium">
+                    <EmployeeProfileLink id={skill.employeeId} name={skill.employeeName} />
+                  </TableCell>
                   <TableCell>{skill.skills}</TableCell>
                   <TableCell>{skill.expertise}</TableCell>
                   <TableCell>{skill.approvedBy}</TableCell>

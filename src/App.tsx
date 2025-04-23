@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import AllEmployees from "./pages/AllEmployees";
 import HelpCenter from "./pages/HelpCenter";
+import EmployeeDetails from "./pages/EmployeeDetails";
 
 // Projects, Departments and Designations Pages
 import Projects from "./pages/Projects";
@@ -73,7 +74,7 @@ const App = () => {
             <Route path="/home" element={<AppLayout><Index /></AppLayout>} />
             <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
             <Route path="/employees" element={<AppLayout><AllEmployees /></AppLayout>} />
-            <Route path="/employees/:id" element={<AppLayout><Profile /></AppLayout>} />
+            <Route path="/employees/:id" element={<AppLayout><EmployeeDetails /></AppLayout>} />
             
             <Route path="/projects" element={<AppLayout><Projects /></AppLayout>} />
             
