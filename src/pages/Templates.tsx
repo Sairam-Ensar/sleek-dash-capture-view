@@ -203,12 +203,12 @@ export default function Templates() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Your Templates</h2>
               <Dialog>
-                <Dialog.Trigger asChild>
+                <DialogTrigger asChild>
                   <PremiumButton size="sm">
                     <Plus className="h-4 w-4" />
                     New Template
                   </PremiumButton>
-                </Dialog.Trigger>
+                </DialogTrigger>
                 <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden">
                   <DialogHeader className="p-6 bg-gradient-to-r from-primary/5 to-primary/10 border-b">
                     <DialogTitle className="flex items-center gap-2">

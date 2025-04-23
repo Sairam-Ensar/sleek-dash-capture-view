@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { EditIcon, DeleteIcon, CancelIcon } from "lucide-react";
+import { EditIcon, Trash2 as DeleteIcon, X } from "lucide-react";
 
 interface ActionMenuProps {
   onEdit?: () => void;
@@ -19,7 +19,7 @@ export function ActionMenu({ onEdit, onDelete, onCancel }: ActionMenuProps) {
         <DeleteIcon className="mr-2 w-4 h-4" /> Delete
       </Button>
       <Button variant="ghost" className="justify-start" onClick={onCancel}>
-        <CancelIcon className="mr-2 w-4 h-4" /> Cancel
+        <X className="mr-2 w-4 h-4" /> Cancel
       </Button>
     </div>
   );
