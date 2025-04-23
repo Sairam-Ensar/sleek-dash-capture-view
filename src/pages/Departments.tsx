@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableBody,
@@ -9,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Plus, MoreHorizontal } from "lucide-react";
+import { ActionButtonsLayout } from "@/components/ui/action-button-layout";
 
 // Dummy departments data
 const departments = [
@@ -25,26 +27,10 @@ export default function Departments() {
       {/* Header section */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-5">
         <h1 className="text-2xl font-bold text-gray-900">Departments</h1>
-        <div className="flex items-center gap-4">
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            AGENT
-          </Button>
-          <Button
-            variant="outline"
-            className="px-6 border-primary text-primary font-semibold rounded-full hover:bg-blue-50"
-          >
-            HELP DESK
-          </Button>
-          <Button 
-            className="bg-gradient-to-r from-primary to-blue-700 text-white px-4 py-2 rounded-full hover:from-blue-700 hover:to-blue-800 flex items-center gap-2"
-          >
-            <Plus className="h-4 w-4" />
-            ADD DEPARTMENT
-          </Button>
-        </div>
+        <ActionButtonsLayout 
+          addLabel="ADD DEPARTMENT"
+          showExport={true}
+        />
       </div>
 
       {/* Departments table */}

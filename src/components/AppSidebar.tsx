@@ -98,7 +98,6 @@ const MenuItemWithPopup = ({ item, isActive }: { item: { title: string; icon: an
     <>
       <SidebarMenuItem>
         <SidebarMenuButton
-          asChild
           tooltip={item.title}
           isActive={isActive}
           className={cn(
